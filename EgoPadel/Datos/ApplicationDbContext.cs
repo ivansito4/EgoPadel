@@ -12,10 +12,8 @@ namespace EgoPadel.Datos
         }
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Pista> Pista { get; set; }
-
-        //añadir ReservarPista
-
         public DbSet<Equipo> Equipo { get; set; }
         public DbSet<UsuarioApp> UsuarioApp { get; set; }
+        public DbSet<ReservaPista> ReservaPista { get; set; }
     }
 }
