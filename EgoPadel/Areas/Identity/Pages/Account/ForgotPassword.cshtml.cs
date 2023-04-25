@@ -72,8 +72,8 @@ namespace EgoPadel.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    "Cambiar la contraseña",
+                    $"Porfavor, cambia la contraseña <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>dando clic aquí</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
