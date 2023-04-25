@@ -5,6 +5,6 @@ namespace EgoPadel.Models
 {
     public class Empleado
     {
-        public int QUESO { get; set; }
+        public int PINAR { get; set; }
     }
 }
