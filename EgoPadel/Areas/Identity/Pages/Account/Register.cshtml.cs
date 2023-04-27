@@ -145,7 +145,14 @@ namespace EgoPadel.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)   //Usuario creado correctamente
                 {
-                    await _userManager.AddToRoleAsync(user, WC.AdminRol);
+                    if(User.IsInRole(WC.AdminRol))  //Solo admins pueden crear otros admins
+                    {
+                        await _userManager.AddToRoleAsync(user, WC.AdminRol);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, WC.UsuarioRol);
+                    }
 
                     _logger.LogInformation("User created a new account with password.");
 
