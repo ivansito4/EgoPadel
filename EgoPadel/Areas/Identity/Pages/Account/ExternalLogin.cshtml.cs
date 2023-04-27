@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using EgoPadel.Models;
 
 namespace EgoPadel.Areas.Identity.Pages.Account
 {
@@ -138,8 +139,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account
                     {
                         Email = info.Principal.FindFirstValue(ClaimTypes.Email),
                         Nombre = info.Principal.FindFirstValue(ClaimTypes.Name),
-                        PhoneNumber = info.Principal.FindFirstValue(ClaimTypes.MobilePhone),
-                        Login = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
+                        PhoneNumber = info.Principal.FindFirstValue(ClaimTypes.MobilePhone)
                     };
                 }
                 return Page();
@@ -159,7 +159,15 @@ namespace EgoPadel.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
+                //var user = CreateUser();
+                var user = new UsuarioApp
+                {
+                    UserName = Input.Login,
+                    Email = Input.Email,
+                    PhoneNumber = Input.PhoneNumber,
+                    Nombre = Input.Nombre,
+                    Apellidos = Input.Apellidos
+                };
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -167,6 +175,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, WC.UsuarioRol);
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
