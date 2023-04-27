@@ -35,7 +35,12 @@
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Crear administrador</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Producto" asp-action="Crear">Productos</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Producto" asp-action="Index">Administrar Productos</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Empleado" asp-action="Index">Administrar Empleados</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Equipo" asp-action="Index">Administrar Equipos</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="ParticipantesIndividual" asp-action="Index">Administrar Participantes Torneo (Individual)</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="ParticipantesEquipo" asp-action="Index">Administrar Participantes Torneo (Equipo)</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Reserva" asp-action="Index">Administrar Reservas</a>
                                     </li>
                                 </ul>
                             </li>
