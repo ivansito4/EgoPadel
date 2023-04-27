@@ -84,6 +84,11 @@ namespace EgoPadel.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            public string Nombre { get; set; }
+            public string Apellidos { get; set; }
+            public string Login { get; set; }
+            public string PhoneNumber { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -131,7 +136,10 @@ namespace EgoPadel.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        Nombre = info.Principal.FindFirstValue(ClaimTypes.Name),
+                        PhoneNumber = info.Principal.FindFirstValue(ClaimTypes.MobilePhone),
+                        Login = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier)
                     };
                 }
                 return Page();
