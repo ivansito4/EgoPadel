@@ -1,6 +1,7 @@
 ﻿using EgoPadel.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
 
 namespace EgoPadel.Datos
 {
@@ -16,5 +17,9 @@ namespace EgoPadel.Datos
         public DbSet<UsuarioApp> UsuarioApp { get; set; }
         public DbSet<ReservaPista> ReservaPista { get; set; }
         public DbSet<Empleado> Empleado { get; set; }
+        public DbSet<Torneo> Torneo { get; set; } 
+        public DbSet<ParticipantesIndividual> ParticipantesIndividual { get; set; }
+        public DbSet<ParticipantesEquipo> ParticipantesEquipos { get; set; }
+        public DbSet<Pedido> Pedido { get; set; }   
     }
 }

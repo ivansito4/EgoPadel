@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EgoPadel.Models
 {
-    public class ParticipantesIndividual
+    public class ParticipantesEquipo
     {
         [Key]
         public int Id { get; set; }
@@ -12,8 +12,6 @@ namespace EgoPadel.Models
         public int TorneoId { get; set; }
 
         [ForeignKey(nameof(TorneoId))]
-        public Torneo Torneo{ get; set; }
-
-
+        public Torneo Torneo { get; set; }
     }
 }
