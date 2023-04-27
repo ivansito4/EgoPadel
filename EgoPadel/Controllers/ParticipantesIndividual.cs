@@ -4,18 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EgoPadel.Controllers
 {
-    public class ParticipantesEquipoController : Controller
+    public class ParticipantesIndividualController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ParticipantesEquipoController(ApplicationDbContext db)
+        public ParticipantesIndividualController(ApplicationDbContext db)
         {
             _db = db;  
         }
         public IActionResult Index()
         {
-            IEnumerable<ParticipantesEquipo> listaParticipantesEquipo = _db.ParticipantesEquipos;
-            return View(listaParticipantesEquipo);
+            IEnumerable<ParticipantesIndividual> listaParticipantesIndividual = _db.ParticipantesIndividual;
+
+            return View(listaParticipantesIndividual);
         }
 
         //Get
@@ -26,9 +27,9 @@ namespace EgoPadel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(ParticipantesEquipo participantesEquipo)
+        public IActionResult Crear(ParticipantesIndividual participantesIndividual)
         {
-            _db.ParticipantesEquipos.Add(participantesEquipo);
+            _db.ParticipantesIndividual.Add(participantesIndividual);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
