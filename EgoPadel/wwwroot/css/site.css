@@ -16,3 +16,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+header{
+    color: white;
+    background-color:white;
+}
+
+.footer{
+    color: white;
+    background-color: black;
+}
