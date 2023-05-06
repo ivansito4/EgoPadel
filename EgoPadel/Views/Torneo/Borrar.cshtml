@@ -1,0 +1,52 @@
+﻿@model EgoPadel.Models.Torneo
+
+@{
+    ViewData["Title"] = "Borrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Borrar</h1>
+
+<h3>¿Estás seguro de que quieres eliminar el torneo?</h3>
+<div>
+    <h4>Torneo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NroPlazas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NroPlazas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Premio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Premio)
+        </dd>
+    </dl>
+    
+    <form asp-action="Borrar">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Borrar" class="btn btn-danger" /> |
+        <a class="btn btn-success" asp-action="Index">Volver a la lista</a>
+    </form>
+</div>

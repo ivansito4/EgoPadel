@@ -28,8 +28,11 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(Pedido pedido)
         {
-            _db.Pedido.Add(pedido);
-            _db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _db.Pedido.Add(pedido);
+                _db.SaveChanges();
+            }
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
     }
