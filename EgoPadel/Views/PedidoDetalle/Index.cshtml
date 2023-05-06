@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EgoPadel.Models.Pista>
+﻿@model IEnumerable<EgoPadel.Models.PedidoDetalle>
 
 @{
     ViewData["Title"] = "Index";
@@ -8,16 +8,16 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Crear">Create New</a>
+    <a asp-action="Crear">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Numero)
+                @Html.DisplayNameFor(model => model.Pedido)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
+                @Html.DisplayNameFor(model => model.Producto)
             </th>
             <th></th>
         </tr>
@@ -26,10 +26,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Numero)
+                @Html.DisplayFor(modelItem => item.Pedido.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
+                @Html.DisplayFor(modelItem => item.Producto.Nombre)
             </td>
             <td>
                 <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |

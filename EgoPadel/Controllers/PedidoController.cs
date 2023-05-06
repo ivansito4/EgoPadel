@@ -32,7 +32,63 @@ namespace EgoPadel.Controllers
             {
                 _db.Pedido.Add(pedido);
                 _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
+            return View(pedido);
+
+        }
+
+        //Get
+        public IActionResult Editar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Pedido.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(Pedido pedido)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Pedido.Update(pedido);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(pedido);
+        }
+
+        //Get
+        public IActionResult Borrar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Pedido.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Borrar(Pedido pedido)
+        {
+            if (pedido == null)
+            {
+                return NotFound();
+            }
+            _db.Pedido.Remove(pedido);
+            _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
     }

@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EgoPadel.Controllers
 {
-    public class ProductoController : Controller
+    public class PedidoDetalleController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ProductoController(ApplicationDbContext db)
+        public PedidoDetalleController(ApplicationDbContext db)
         {
-            _db = db;  
+            _db = db;
         }
         public IActionResult Index()
         {
-            IEnumerable<Producto> listaProducto = _db.Producto;
-            return View(listaProducto);
+            IEnumerable<PedidoDetalle> listaPedidoDetalleDetalle = _db.PedidoDetalles;
+            return View(listaPedidoDetalleDetalle);
         }
 
         //Get
@@ -26,15 +26,15 @@ namespace EgoPadel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Producto producto)
+        public IActionResult Crear(PedidoDetalle pedidoDetalle)
         {
             if (ModelState.IsValid)
             {
-                _db.Producto.Add(producto);
+                _db.PedidoDetalles.Add(pedidoDetalle);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
-            return View(producto);
+            return View(pedidoDetalle);
 
         }
 
@@ -45,7 +45,7 @@ namespace EgoPadel.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.Producto.Find(Id);
+            var obj = _db.PedidoDetalles.Find(Id);
             if (obj == null)
             {
                 return NotFound();
@@ -54,15 +54,15 @@ namespace EgoPadel.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Editar(Producto producto)
+        public IActionResult Editar(PedidoDetalle pedidoDetalle)
         {
             if (ModelState.IsValid)
             {
-                _db.Producto.Update(producto);
+                _db.PedidoDetalles.Update(pedidoDetalle);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
-            return View(producto);
+            return View(pedidoDetalle);
         }
 
         //Get
@@ -72,7 +72,7 @@ namespace EgoPadel.Controllers
             {
                 return NotFound();
             }
-            var obj = _db.Producto.Find(Id);
+            var obj = _db.PedidoDetalles.Find(Id);
             if (obj == null)
             {
                 return NotFound();
@@ -81,13 +81,13 @@ namespace EgoPadel.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Borrar(Producto producto)
+        public IActionResult Borrar(PedidoDetalle pedidoDetalle)
         {
-            if (producto == null)
+            if (pedidoDetalle == null)
             {
                 return NotFound();
             }
-            _db.Producto.Remove(producto);
+            _db.PedidoDetalles.Remove(pedidoDetalle);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
