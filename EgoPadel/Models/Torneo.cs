@@ -18,8 +18,8 @@ namespace EgoPadel.Models
         [Required(ErrorMessage = "Número de plazas del Torneo obligatoria.")]
         public int NroPlazas { get; set; }
 
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
 
-        public string Premio { get; set; }
+        public string? Premio { get; set; }
     }
 }

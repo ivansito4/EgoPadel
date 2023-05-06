@@ -8,10 +8,16 @@ namespace EgoPadel.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public int TorneoId { get; set; }
 
         [ForeignKey(nameof(TorneoId))]
         public Torneo Torneo { get; set; }
+
+        [Required]
+        public int EquipoId { get; set; }
+
+        [ForeignKey(nameof(EquipoId))]
+        public Equipo Equipo { get; set; }
     }
 }

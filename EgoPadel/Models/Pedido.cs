@@ -8,15 +8,22 @@ namespace EgoPadel.Models
     {
         [Key]
         public int Id { get; set; }
-        public int ProductoId { get; set; }
 
-        [ForeignKey(nameof(ProductoId))]
-        public Producto Producto { get; set; }
+        [Required]
+        public string UsuarioId { get; set; }
 
-        [Required(ErrorMessage = "Precio Total del Pedido obligatorio.")]
-        public float PrecioTotal { get; set; }
-        
-       [Required(ErrorMessage = "Fecha del Pedido obligatorio.")]
-        public DateTime Fecha { get; set; }
+        [ForeignKey("UsuarioAplicacionId")]
+        public UsuarioApp UsuarioApp { get; set; }
+
+        public DateTime FechaOrden { get; set; }
+
+        [Required]      //Guardar los datos otra vez por si los cambia, que se guarden los de ESTE
+        public string Telefono { get; set; }
+
+        [Required]
+        public string NombreCompleto { get; set; }
+
+        [Required]
+        public string Email { get; set; }
     }
 }

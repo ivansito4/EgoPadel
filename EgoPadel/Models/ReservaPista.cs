@@ -6,9 +6,9 @@ namespace EgoPadel.Models
 {
     public class ReservaPista
     {
-        public void asignarPista(UsuarioApp usuarioApp)  //Pasarselo por parametro
+        public void asignarId(UsuarioApp usuarioApp)  //Pasarselo por parametro
         {
-            UsuarioApp = usuarioApp;
+            UsuarioId = usuarioApp.Id;
         }
         [Key]
         public int Id { get; set; }
@@ -19,7 +19,10 @@ namespace EgoPadel.Models
         [ForeignKey(nameof(PistaId))]
         public Pista Pista { get; set;}
 
-        [Required]      //INICIALIZAR EN UN CTOR?????????
+        [Required]      
+        public string UsuarioId { get; set; }
+
+        [ForeignKey(nameof(UsuarioId))]
         public UsuarioApp UsuarioApp { get; set; }
 
         [Required(ErrorMessage = "Hora y Fecha de Pista obligatorio.")]
