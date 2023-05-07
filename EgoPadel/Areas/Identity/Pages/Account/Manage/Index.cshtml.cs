@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EgoPadel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -57,19 +58,32 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             /// </summary>
             [Phone]
             [Display(Name = "Phone number")]
+
             public string PhoneNumber { get; set; }
+            public string Nombre { get; set; }
+            public string Apellidos { get; set; }
+            public string Email { get; set; }
+            public int Puntos { get; set; } 
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(UsuarioApp user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var email = await _userManager.GetEmailAsync(user);
+            var nombre = user.Nombre;
+            var apellidos=user.Apellidos;
+            var puntos = user.Puntos;
 
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Email = email,
+                Nombre = nombre,
+                Apellidos = apellidos,
+                Puntos=puntos
             };
         }
 
@@ -81,7 +95,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            await LoadAsync(user);
+            await LoadAsync((UsuarioApp)user);
             return Page();
         }
 
@@ -95,7 +109,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
-                await LoadAsync(user);
+                await LoadAsync((UsuarioApp)user);
                 return Page();
             }
 
@@ -105,7 +119,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Error al intentar cambiar su número de teléfono.";
                     return RedirectToPage();
                 }
             }

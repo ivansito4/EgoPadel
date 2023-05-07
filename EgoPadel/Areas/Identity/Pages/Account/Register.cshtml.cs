@@ -108,7 +108,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account
             public string Login { get; set; }
             public string PhoneNumber { get; set; } //Ya esta incluido en la libreria
 
-            //Datos de puntos y equipo aqui??
+           
         }
 
 
