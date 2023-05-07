@@ -15,14 +15,14 @@ html {
 
 body {
   margin-bottom: 60px;
-}
-
-header{
-    color: white;
-    background-color:white;
+  background-color:black
 }
 
 .footer{
     color: white;
     background-color: black;
+}
+
+.container{
+    color: white;
 }
