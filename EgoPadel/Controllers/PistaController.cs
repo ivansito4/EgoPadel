@@ -28,7 +28,66 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(Pista pista)
         {
-            _db.Pista.Add(pista);
+            if (ModelState.IsValid)
+            {
+                _db.Pista.Add(pista);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(pista);
+
+        }
+
+        //Get
+        public IActionResult Editar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Pista.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(Pista pista)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Pista.Update(pista);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(pista);
+        }
+
+        //Get
+        public IActionResult Borrar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Pista.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Borrar(Pista pista)
+        {
+            if (pista == null)
+            {
+                return NotFound();
+            }
+            _db.Pista.Remove(pista);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }

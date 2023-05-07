@@ -4,6 +4,7 @@ using EgoPadel.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgoPadel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230506155408_DetallePedidoBBDD")]
+    partial class DetallePedidoBBDD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,29 +158,6 @@ namespace EgoPadel.Migrations
                     b.HasIndex("UsuarioAplicacionId");
 
                     b.ToTable("Pedido");
-                });
-
-            modelBuilder.Entity("EgoPadel.Models.PedidoDetalle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("PedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PedidoId");
-
-                    b.HasIndex("ProductoId");
-
-                    b.ToTable("PedidoDetalles");
                 });
 
             modelBuilder.Entity("EgoPadel.Models.Pista", b =>
@@ -560,25 +540,6 @@ namespace EgoPadel.Migrations
                         .HasForeignKey("UsuarioAplicacionId");
 
                     b.Navigation("UsuarioApp");
-                });
-
-            modelBuilder.Entity("EgoPadel.Models.PedidoDetalle", b =>
-                {
-                    b.HasOne("EgoPadel.Models.Pedido", "Pedido")
-                        .WithMany()
-                        .HasForeignKey("PedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EgoPadel.Models.Producto", "Producto")
-                        .WithMany()
-                        .HasForeignKey("ProductoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pedido");
-
-                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("EgoPadel.Models.ReservaPista", b =>

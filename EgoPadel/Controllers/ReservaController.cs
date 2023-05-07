@@ -26,9 +26,68 @@ namespace EgoPadel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(ReservaPista reservaPista)
+        public IActionResult Crear(ReservaPista reserva)
         {
-            _db.ReservaPista.Add(reservaPista);
+            if (ModelState.IsValid)
+            {
+                _db.ReservaPista.Add(reserva);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(reserva);
+
+        }
+
+        //Get
+        public IActionResult Editar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.ReservaPista.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(ReservaPista reserva)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ReservaPista.Update(reserva);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(reserva);
+        }
+
+        //Get
+        public IActionResult Borrar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.ReservaPista.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Borrar(ReservaPista reserva)
+        {
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+            _db.ReservaPista.Remove(reserva);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }

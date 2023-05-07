@@ -19,16 +19,55 @@ namespace EgoPadel.Controllers
         }
 
         //Get
-        public IActionResult Crear()
+        public IActionResult Editar(int? Id)
         {
-            return View();
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.ParticipantesEquipos.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(ParticipantesEquipo participantesEquipo)
+        public IActionResult Editar(ParticipantesEquipo participantesEquipo)
         {
-            _db.ParticipantesEquipos.Add(participantesEquipo);
+            if (ModelState.IsValid)
+            {
+                _db.ParticipantesEquipos.Update(participantesEquipo);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            }
+            return View(participantesEquipo);
+        }
+
+        //Get
+        public IActionResult Borrar(int? Id)
+        {
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.ParticipantesEquipos.Find(Id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Borrar(ParticipantesEquipo participantesEquipo)
+        {
+            if (participantesEquipo == null)
+            {
+                return NotFound();
+            }
+            _db.ParticipantesEquipos.Remove(participantesEquipo);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }

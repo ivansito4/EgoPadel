@@ -1,0 +1,40 @@
+﻿@model EgoPadel.Models.ParticipantesEquipo
+
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar</h1>
+
+<h4>ParticipantesEquipo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Editar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TorneoId" class="control-label"></label>
+                <select asp-for="TorneoId" class="form-control" asp-items="ViewBag.TorneoId"></select>
+                <span asp-validation-for="TorneoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipoId" class="control-label"></label>
+                <select asp-for="EquipoId" class="form-control" asp-items="ViewBag.EquipoId"></select>
+                <span asp-validation-for="EquipoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Actualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

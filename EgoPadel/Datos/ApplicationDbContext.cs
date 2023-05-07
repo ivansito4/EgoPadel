@@ -21,5 +21,7 @@ namespace EgoPadel.Datos
         public DbSet<ParticipantesIndividual> ParticipantesIndividual { get; set; }
         public DbSet<ParticipantesEquipo> ParticipantesEquipos { get; set; }
         public DbSet<Pedido> Pedido { get; set; }   
+
+        public DbSet<PedidoDetalle> PedidoDetalles { get; set; }
     }
 }
