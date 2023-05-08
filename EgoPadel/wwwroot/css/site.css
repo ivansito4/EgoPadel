@@ -47,3 +47,23 @@ body {
     font-size: 50px;
     font-family: 'Fjalla One', sans-serif;
 }
+
+#titulo{
+    position: absolute;
+    top: 350px;
+    left: 33%;
+}
+
+#titulo h1 {
+        font-size: 80px;
+        font-family: 'Bebas Neue', cursive;
+}
+
+#titulo h2 {
+        font-size: 70px;
+        font-family: 'Bebas Neue', cursive;
+}
+
+.userMenu{
+    color:white;
+}
