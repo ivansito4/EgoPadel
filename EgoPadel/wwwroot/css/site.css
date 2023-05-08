@@ -31,3 +31,19 @@ body {
     width:60px;
     height:60px;
 }
+
+#nombreIzq {
+    position: absolute;
+    left: 35px;
+    top: 150px;
+    font-size: 50px;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+#nombreDer {
+    position: absolute;
+    right: 35px;
+    top: 150px;
+    font-size: 50px;
+    font-family: 'Fjalla One', sans-serif;
+}
