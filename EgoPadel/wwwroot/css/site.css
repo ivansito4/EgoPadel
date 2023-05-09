@@ -1,35 +1,35 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-  background-color:black
+    margin-bottom: 60px;
+    background-color: black
 }
 
-.footer{
+.footer {
     color: white;
     background-color: black;
 }
 
-.container{
+.container {
     color: white;
 }
 
-#logo{
-    width:60px;
-    height:60px;
+#logo {
+    width: 60px;
+    height: 60px;
 }
 
 #nombreIzq {
@@ -40,6 +40,12 @@ body {
     font-family: 'Fjalla One', sans-serif;
 }
 
+@media screen and (max-width: 1300px) {
+    #nombreIzq {
+        display: none;
+    }
+}
+
 #nombreDer {
     position: absolute;
     right: 35px;
@@ -48,22 +54,24 @@ body {
     font-family: 'Fjalla One', sans-serif;
 }
 
-#titulo{
-    position: absolute;
-    top: 350px;
-    left: 33%;
+@media screen and (max-width: 1300px) {
+    #nombreDer {
+        display: none;
+    }
+}
+
+#titulo {
+    margin: 0px auto;
+    position: relative;
+    bottom: 500px
 }
 
 #titulo h1 {
-        font-size: 80px;
-        font-family: 'Bebas Neue', cursive;
+     font-size: 80px;
+     font-family: 'Bebas Neue', cursive;
 }
 
 #titulo h2 {
-        font-size: 70px;
-        font-family: 'Bebas Neue', cursive;
-}
-
-.userMenu{
-    color:white;
+     font-size: 70px;
+     font-family: 'Bebas Neue', cursive;
 }
