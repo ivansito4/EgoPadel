@@ -64,6 +64,10 @@ body {
         font-family: 'Bebas Neue', cursive;
 }
 
-.userMenu{
-    color:white;
+#register{
+    color: white;
+}
+
+#login{
+    color: white;
 }
