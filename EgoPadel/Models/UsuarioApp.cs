@@ -15,5 +15,8 @@ namespace EgoPadel.Models
 
         [ForeignKey(nameof(EquipoId))]
         public Equipo? Equipo { get; set; }
+
+        [DefaultValue("sinfoto.jpg")]
+        public string Foto { get; set; }
     }
 }
