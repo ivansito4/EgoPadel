@@ -1,4 +1,7 @@
 using EgoPadel.Datos;
+using EgoPadel.Infrastructura;
+using EgoPadel.Models;
+using EgoPadel.Servicios;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +18,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
                               .AddDefaultTokenProviders().AddDefaultUI()
                               .AddEntityFrameworkStores<ApplicationDbContext>();
+
+builder.Services.AddIdentityCore<UsuarioApp>().AddRoles<IdentityRole>()
+    .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<UsuarioApp, IdentityRole>>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders().AddDefaultUI();
+
+builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 
 
 //Login con facebook
