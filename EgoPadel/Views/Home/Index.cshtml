@@ -1,25 +1,32 @@
 ﻿@{
     ViewData["Title"] = "Pagina principal";
 }
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    </head>
 
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-</head>
-
-<div class="bg-black text-center">
-    <div class="text-center">
-	    <video heigth="650px" width="100%" autoplay muted loop>
-            <source src="~/videos/intro.mp4"/>
-        </video>
-            <p id="nombreIzq">E<br />G<br />O<br />P<br />A<br />D<br />E<br />L</p>
-            <p id="nombreDer">E<br />G<br />O<br />P<br />A<br />D<br />E<br />L</p>
-        <div id="titulo">
-            <h1>CLUB DE PÁDEL INDOOR</h1>
-            <h2>EGOPADEL</h2>
+    <body>
+    <div class="bg-black text-center" style="height: 730px;">
+        <div>
+	        <video id="video" autoplay muted loop preload="auto">
+                <source src="~/videos/intro.mp4"/>
+            </video>
+                <p id="nombreIzq">E<br />G<br />O<br />P<br />A<br />D<br />E<br />L</p>
+                <p id="nombreDer">E<br />G<br />O<br />P<br />A<br />D<br />E<br />L</p>
+            <div id="titulo">
+                <h1>CLUB DE PÁDEL INDOOR</h1>
+                <h2>EGOPADEL</h2>
+            </div>
         </div>
     </div>
-</div>
 
+    <div id="informacion">
+        <h2>CLUB DE PÁDEL INDOOR</h2>
+    </div>
+    </body>
+</html>
