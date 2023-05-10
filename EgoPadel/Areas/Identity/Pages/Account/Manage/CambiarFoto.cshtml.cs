@@ -10,6 +10,7 @@ using EgoPadel.Infrastructura;
 using EgoPadel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EgoPadel.Areas.Identity.Pages.Account.Manage
@@ -94,23 +95,39 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                _unitOfWork.UploadImage(file);
-                await LoadAsync((UsuarioApp)user);
-                return Page();
+                user.Foto = file.FileName;
+                await _userManager.UpdateAsync(user);
+                return RedirectToPage();
             }
-
-            
-            if (Input.rutaFoto != user.Foto)
-            {
-                user.Foto=Input.rutaFoto;
-            }
-
-            await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Perfil actualizado";
-            return RedirectToPage();
+            return Page();
         }
+
+
+        //{
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null)
+        //    {
+        //        return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+        //    }
+
+        //    if (!ModelState.IsValid)
+        //    {
+                
+        //        return Page();
+        //    }
+        //    _unitOfWork.UploadImage(file);
+        //    await LoadAsync((UsuarioApp)user);
+
+        //    if (Input.rutaFoto != user.Foto)
+        //    {
+        //        user.Foto=Input.rutaFoto;
+        //    }
+
+        //    await _signInManager.RefreshSignInAsync(user);
+        //    StatusMessage = "Perfil actualizado";
+        //    return RedirectToPage();
+        //}
     }
 }
