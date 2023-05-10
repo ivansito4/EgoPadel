@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using EgoPadel.Infrastructura;
 using EgoPadel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +14,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace EgoPadel.Areas.Identity.Pages.Account.Manage
 {
-    public class IndexModel : PageModel
+    public class CambarFotoModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<UsuarioApp> _userManager;
+        private readonly SignInManager<UsuarioApp> _signInManager;
 
-        public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        public CambarFotoModel(
+            UserManager<UsuarioApp> userManager,
+            SignInManager<UsuarioApp> signInManager,
+            IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -56,37 +60,18 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Phone]
-            [Display(Name = "Phone number")]
-
-            public string PhoneNumber { get; set; }
-            public string Nombre { get; set; }
-            public string Apellidos { get; set; }
-            public string Email { get; set; }
-            public int Puntos { get; set; }
-            public  string RutaImagen { get; set; }
+            public string rutaFoto { get; set; }
         }
 
         private async Task LoadAsync(UsuarioApp user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            var email = await _userManager.GetEmailAsync(user);
-            var nombre = user.Nombre;
-            var apellidos=user.Apellidos;
-            var puntos = user.Puntos;
-            var rutaImagen = user.Foto;
+            
+            var foto = user.Foto;
 
-            Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber,
-                Email = email,
-                Nombre = nombre,
-                Apellidos = apellidos,
-                Puntos=puntos,
-                RutaImagen=rutaImagen
+                rutaFoto = foto
             };
         }
 
@@ -97,13 +82,12 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-            
 
             await LoadAsync((UsuarioApp)user);
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(IFormFile file)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -113,23 +97,19 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
 
             if (!ModelState.IsValid)
             {
+                _unitOfWork.UploadImage(file);
                 await LoadAsync((UsuarioApp)user);
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+            
+            if (Input.rutaFoto != user.Foto)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    StatusMessage = "Error al intentar cambiar su número de teléfono.";
-                    return RedirectToPage();
-                }
+                user.Foto=Input.rutaFoto;
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Perfil actualizado";
             return RedirectToPage();
         }
     }
