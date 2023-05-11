@@ -1,21 +1,23 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity;
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@*@model EgoPadel.Models._LoginPartialController*@
+
+@inject SignInManager<UsuarioApp> SignInManager
+@inject UserManager<UsuarioApp> UserManager
+
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-      
-    <li class="nav-item">
+        
+        <li class="nav-item">
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Bienvenido <b>@UserManager.GetUserName(User)</b></a>
     </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://img.freepik.com/vector-premium/icono-circulo-usuario-anonimo-ilustracion-vector-estilo-plano-sombra_520826-1931.jpg" width="30px">
+                @*<img src="~/fotosUsuarios/@Model.Input.RutaImagen" width="50px" />*@
             </a>
             <ul class="dropdown-menu" style="margin-left:-120px;">
-                @*<li><a class="dropdown-item" asp-area="" asp-controller="Categoria" asp-action="Index">Categoria</a></li>*@
                 <li><a class="dropdown-item">Perfil</a></li>
                 <li><a class="dropdown-item">Mi Equipo</a></li>
                 <li><a class="dropdown-item">Historial de Partidos</a></li>
@@ -38,3 +40,4 @@ else
         </li>
 }
 </ul>
+

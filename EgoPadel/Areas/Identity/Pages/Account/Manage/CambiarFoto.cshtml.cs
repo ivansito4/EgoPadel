@@ -97,8 +97,11 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             }
             if (ModelState.IsValid)
             {
+                _unitOfWork.UploadImage(file);
                 user.Foto = file.FileName;
                 await _userManager.UpdateAsync(user);
+                await _signInManager.RefreshSignInAsync(user);
+                StatusMessage = "Foto de Perfil Actualizada";
                 return RedirectToPage();
             }
             return Page();

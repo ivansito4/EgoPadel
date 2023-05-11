@@ -15,12 +15,12 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<UsuarioApp> _userManager;
+        private readonly SignInManager<UsuarioApp> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<UsuarioApp> userManager,
+            SignInManager<UsuarioApp> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -60,6 +60,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
 
             public string PhoneNumber { get; set; }
+            public string Login { get; set; }
             public string Nombre { get; set; }
             public string Apellidos { get; set; }
             public string Email { get; set; }
@@ -77,11 +78,11 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             var puntos = user.Puntos;
             var rutaImagen = user.Foto;
 
-            Username = userName;
 
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
+                Login = userName,
                 Email = email,
                 Nombre = nombre,
                 Apellidos = apellidos,
@@ -127,9 +128,36 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            if (Input.Login != user.UserName)
+            {
+                var ResultadoLogin = await _userManager.SetUserNameAsync(user, Input.Login);
+                if (!ResultadoLogin.Succeeded)
+                {
+                    StatusMessage = "Error al intentar cambiar su nombre de usuario.";
+                    return RedirectToPage();
+                }
+            }
+            if (Input.Email != user.Email)
+            {
+                var ResultadoEmail = await _userManager.SetEmailAsync(user, Input.Email);
+                if (!ResultadoEmail.Succeeded)
+                {
+                    StatusMessage = "Error al intentar cambiar su email.";
+                    return RedirectToPage();
+                }
+            }
+            if (Input.Nombre != user.Nombre)
+            {
+                user.Nombre = Input.Nombre;
+            }
+            if (Input.Apellidos != user.Apellidos)
+            {
+                user.Apellidos = Input.Apellidos;
+            }
 
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Perfil actualizado";
             return RedirectToPage();
         }
     }
