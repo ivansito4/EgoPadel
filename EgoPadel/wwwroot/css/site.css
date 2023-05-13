@@ -55,7 +55,7 @@ body {
 
 #informacion {
     display: flex;
-    width: 120%;
+    width: 115%;
     height: 550px;
     background-color: #23346D;
     color: white;
@@ -138,3 +138,20 @@ body {
         position: relative;
         right: 10px;
     }
+
+.divDecorativo {
+    transform: rotate(-1deg);
+    background-color: #E01F4D;
+    width: 115%;
+    height: 150px;
+    position: relative;
+    bottom: 165px;
+}
+
+.infoPistas {
+    background-color: #E01F4D;
+    width: 115%;
+    height: 450px;
+    position: relative;
+    bottom: 180px;
+}
