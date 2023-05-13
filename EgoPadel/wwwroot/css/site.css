@@ -26,7 +26,6 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    
 }
 
 #logo {
@@ -42,22 +41,98 @@ body {
     left: 100px
 }
 
-#titulo h1 {
-     font-size: 80px;
-     font-family: 'Bebas Neue', cursive;
-}
+    #titulo h1 {
+        font-size: 80px;
+        font-family: 'Bebas Neue', cursive;
+    }
 
-#titulo h2 {
-     font-size: 70px;
-     font-family: 'Bebas Neue', cursive;
-}
+    #titulo h2 {
+        font-size: 70px;
+        font-family: 'Bebas Neue', cursive;
+    }
 
 #informacion {
     display: flex;
     width: 120%;
-    height: 50px;
-    background-color: lightgray;
-    color: black;
+    height: 550px;
+    background-color: #23346D;
+    color: white;
     position: relative;
     bottom: 150px;
 }
+
+#logoSecundario {
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 150px;
+    top: 50px;
+}
+
+
+#informacion > h2 {
+    position: absolute;
+    font-size: 50px;
+    font-family: 'Bebas Neue', cursive;
+    width: 300px;
+    text-align: center;
+    left: 290px;
+    top: 70px;
+}
+
+#icono {
+    width: 150px;
+    height: 150px;
+}
+
+#contenidos {
+    height: 170px;
+    margin: 0px auto;
+    position: relative;
+    left: 80px;
+    top: 250px;
+}
+
+    #contenidos > tbody > tr:nth-child(1) > td:nth-child(1) {
+        width: 300px;
+    }
+
+    #contenidos > tbody > tr:nth-child(1) > td:nth-child(2) {
+        width: 300px;
+    }
+
+    #contenidos > tbody > tr:nth-child(1) > td:nth-child(3) {
+        width: 300px;
+    }
+
+    #contenidos > tbody > tr:nth-child(1) > td:nth-child(4) {
+        width: 300px;
+    }
+
+    #contenidos > tbody > tr:nth-child(2) > td:nth-child(1) {
+        font-size: 25px;
+        font-family: 'Bebas Neue', cursive;
+        position: relative;
+        left:5px;
+    }
+
+    #contenidos > tbody > tr:nth-child(2) > td:nth-child(2) {
+        font-size: 25px;
+        font-family: 'Bebas Neue', cursive;
+        position: relative;
+        left: 5px;
+    }
+
+    #contenidos > tbody > tr:nth-child(2) > td:nth-child(3) {
+        font-size: 25px;
+        font-family: 'Bebas Neue', cursive;
+        position: relative;
+        left: 15px;
+    }
+
+    #contenidos > tbody > tr:nth-child(2) > td:nth-child(4) {
+        font-size: 25px;
+        font-family: 'Bebas Neue', cursive;
+        position: relative;
+        right: 10px;
+    }
