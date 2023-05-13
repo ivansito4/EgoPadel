@@ -122,7 +122,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                if (!setPhoneResult.Succeeded || Input.PhoneNumber == null || Input.PhoneNumber == "")
                 {
                     StatusMessage = "Error al intentar cambiar su número de teléfono.";
                     return RedirectToPage();
@@ -133,7 +133,7 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
                 var ResultadoLogin = await _userManager.SetUserNameAsync(user, Input.Login);
                 if (!ResultadoLogin.Succeeded)
                 {
-                    StatusMessage = "Error al intentar cambiar su nombre de usuario.";
+                    StatusMessage = "Error al intentar cambiar su Nombre de usuario.";
                     return RedirectToPage();
                 }
             }
@@ -142,16 +142,25 @@ namespace EgoPadel.Areas.Identity.Pages.Account.Manage
                 var ResultadoEmail = await _userManager.SetEmailAsync(user, Input.Email);
                 if (!ResultadoEmail.Succeeded)
                 {
-                    StatusMessage = "Error al intentar cambiar su email.";
+                    StatusMessage = "Error al intentar cambiar su Email.";
                     return RedirectToPage();
                 }
             }
-            if (Input.Nombre != user.Nombre)
+            if (Input.Nombre != user.Nombre )
             {
+                if(Input.Nombre == null || Input.Nombre == "") {
+                    StatusMessage = "Error al intentar cambiar su Nombre.";
+                    return RedirectToPage();
+                }
                 user.Nombre = Input.Nombre;
             }
             if (Input.Apellidos != user.Apellidos)
             {
+                if (Input.Apellidos == null || Input.Apellidos == "")
+                {
+                    StatusMessage = "Error al intentar cambiar sus Apellidos.";
+                    return RedirectToPage();
+                }
                 user.Apellidos = Input.Apellidos;
             }
 
