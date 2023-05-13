@@ -34,7 +34,7 @@ namespace EgoPadel.Servicios
 
         private string GetpathAndFileName(string filename)
         {
-            string path = _environment.WebRootPath + "\\uploads\\";
+            string path = _environment.WebRootPath + "\\fotosUsuarios\\";
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
