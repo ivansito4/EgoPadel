@@ -31,7 +31,8 @@ namespace EgoPadel.Models
         [Required(ErrorMessage = "Duración de Pista obligatoria.")]
         public int Duracion { get; set; }
 
-        [Required]  
-        public float Precio { get; set; }
+        [Required(ErrorMessage = "El Precio de la reserva es Requerido")]
+        [Range(1, int.MaxValue, ErrorMessage = "El Precio tiene que ser mayor a cero")]
+        public double Precio { get; set; }
     }
 }

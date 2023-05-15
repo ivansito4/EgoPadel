@@ -1,0 +1,56 @@
+﻿@model EgoPadel.Models.ViewModels.ReservaVM
+
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Crear</h1>
+
+<h4>ReservaPista</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Crear">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Reserva.PistaId" class="control-label">Pista</label>
+                <select asp-for="Reserva.PistaId" class="form-select" asp-items="Model.PistaLista">
+                    <option disabled selected>--Seleccione una Pista</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reserva.UsuarioId" class="control-label">Usuario</label>
+                <select asp-for="Reserva.UsuarioId" class="form-control" asp-items="Model.UsuarioLista">
+                    <option disabled selected>--Seleccione un Usuario</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reserva.HoraInicio" class="control-label"></label>
+                <input asp-for="Reserva.HoraInicio" class="form-control" />
+                <span asp-validation-for="Reserva.HoraInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reserva.Duracion" class="control-label"></label>
+                <input asp-for="Reserva.Duracion" class="form-control" />
+                <span asp-validation-for="Reserva.Duracion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Reserva.Precio" class="control-label"></label>
+                <input asp-for="Reserva.Precio" class="form-control" />
+                <span asp-validation-for="Reserva.Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

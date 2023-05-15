@@ -6,3 +6,54 @@
 }
 
 <h1>Index</h1>
+
+<p>
+    <a asp-action="Crear">Crear nueva Reserva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pista.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsuarioApp.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duracion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Pista.Numero)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.UsuarioApp.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+               @* <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |*@
+                <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

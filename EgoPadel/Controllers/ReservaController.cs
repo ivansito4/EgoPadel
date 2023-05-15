@@ -1,6 +1,9 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
+using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace EgoPadel.Controllers
 {
@@ -14,27 +17,58 @@ namespace EgoPadel.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<ReservaPista> listaPista = _db.ReservaPista;
-            return View(listaPista);
+            IEnumerable<ReservaPista> listaReserva = _db.ReservaPista.Include(c => c.Pista).Include(p => p.UsuarioApp);
+            return View(listaReserva);
         }
 
         //Get
         public IActionResult Crear()
         {
-            return View();
+            //IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
+            //{
+            //    Text = c.Numero.ToString(),
+            //    Value = c.Id.ToString()
+            //});
+
+            //ViewBag.pistaDropDown = pistaDropDown;
+
+            //IEnumerable<SelectListItem> usuarioDropDown = _db.UsuarioApp.Select(c => new SelectListItem
+            //{
+            //    Text = c.UserName,
+            //    Value = c.Id.ToString()
+            //});
+            
+            //ViewBag.usuarioDropDown = usuarioDropDown.OrderBy(c => c.Text.ToLower()); ;
+
+            ReservaVM reservaVM = new ReservaVM()
+            {
+                Reserva = new ReservaPista(),
+                PistaLista = _db.Pista.Select(c => new SelectListItem
+                {
+                    Text = c.Numero.ToString(),
+                    Value = c.Id.ToString()
+                }),
+                UsuarioLista = _db.UsuarioApp.Select(c => new SelectListItem
+                {
+                    Text = c.UserName,
+                    Value = c.Id.ToString()
+                }).OrderBy(c => c.Text.ToLower())
+        };
+
+            return View(reservaVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(ReservaPista reserva)
+        public IActionResult Crear(ReservaVM reservaVM)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _db.ReservaPista.Add(reserva);
+                _db.ReservaPista.Add(reservaVM.Reserva);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
-            return View(reserva);
+            return View(reservaVM);
 
         }
 
