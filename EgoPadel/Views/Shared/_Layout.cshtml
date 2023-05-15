@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Producto" asp-action="Index">Productos</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Reserva" asp-action="Index">Reservar Pista</a>
+                        </li>
                         @if (User.IsInRole(WC.AdminRol))
                         {
                             <li class="nav-item dropdown">
