@@ -1,6 +1,9 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
+using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace EgoPadel.Controllers
 {
@@ -14,27 +17,37 @@ namespace EgoPadel.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Pedido> listaPedido = _db.Pedido;
+            IEnumerable<Pedido> listaPedido = _db.Pedido.Include(c => c.UsuarioApp);
             return View(listaPedido);
         }
 
         //Get
         public IActionResult Crear()
         {
-            return View();
+            PedidoVM pedidoVM = new PedidoVM()
+            {
+                Pedido = new Pedido(),
+                UsuarioLista = _db.UsuarioApp.Select(c => new SelectListItem
+                {
+                    Text = c.UserName,
+                    Value = c.Id.ToString()
+                }).OrderBy(c => c.Text.ToLower())
+            };
+
+            return View(pedidoVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Crear(Pedido pedido)
+        public IActionResult Crear(PedidoVM pedidovm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _db.Pedido.Add(pedido);
+                _db.Pedido.Add(pedidovm.Pedido);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
-            return View(pedido);
+            return View(pedidovm);
 
         }
 
