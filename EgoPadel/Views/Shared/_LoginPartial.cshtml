@@ -18,7 +18,7 @@
                 @*<img src="~/fotosUsuarios/@Model.Input.RutaImagen" width="50px" />*@
             </a>
             <ul class="dropdown-menu" style="margin-left:-120px;">
-                <li><a class="dropdown-item">Perfil</a></li>
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Perfil</a></li>
                 <li><a class="dropdown-item">Mi Equipo</a></li>
                 <li><a class="dropdown-item">Historial de Partidos</a></li>
                 <li class="dropdown-item">

@@ -1,8 +1,8 @@
 ﻿@page
 @model LoginModel
 <link href="~/css/loginRegister.css" rel="stylesheet"/>
-<div id="logreg-forms">
-    <h1 class="h3 mb-3 font-weight-normal text-info pt-4" style="text-align:center;">Conectarse</h1>
+<div id="logreg-forms" style="position:relative; left:8%;">
+    <h1 class="h3 mb-3 font-weight-normal text-info pt-4" style="text-align:center; ">Conectarse</h1>
     @{
         if ((Model.ExternalLogins?.Count ?? 0) == 0)
         {
