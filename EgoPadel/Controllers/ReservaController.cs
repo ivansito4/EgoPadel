@@ -24,21 +24,21 @@ namespace EgoPadel.Controllers
         //Get
         public IActionResult Crear()
         {
-            //IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
-            //{
-            //    Text = c.Numero.ToString(),
-            //    Value = c.Id.ToString()
-            //});
+            IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
+            {
+                Text = c.Numero.ToString(),
+                Value = c.Id.ToString()
+            });
 
-            //ViewBag.pistaDropDown = pistaDropDown;
+            ViewBag.pistaDropDown = pistaDropDown;
 
-            //IEnumerable<SelectListItem> usuarioDropDown = _db.UsuarioApp.Select(c => new SelectListItem
-            //{
-            //    Text = c.UserName,
-            //    Value = c.Id.ToString()
-            //});
+            IEnumerable<SelectListItem> usuarioDropDown = _db.UsuarioApp.Select(c => new SelectListItem
+            {
+                Text = c.UserName,
+                Value = c.Id.ToString()
+            });
             
-            //ViewBag.usuarioDropDown = usuarioDropDown.OrderBy(c => c.Text.ToLower()); ;
+            ViewBag.usuarioDropDown = usuarioDropDown.OrderBy(c => c.Text.ToLower()); ;
 
             ReservaVM reservaVM = new ReservaVM()
             {
