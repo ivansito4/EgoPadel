@@ -24,10 +24,12 @@ namespace EgoPadel.Controllers
         //Get
         public IActionResult Crear()
         {
+            
             IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
             {
                 Text = c.Numero.ToString(),
                 Value = c.Id.ToString()
+
             });
 
             ViewBag.pistaDropDown = pistaDropDown;
@@ -54,6 +56,7 @@ namespace EgoPadel.Controllers
                     Value = c.Id.ToString()
                 }).OrderBy(c => c.Text.ToLower())
         };
+            
 
             return View(reservaVM);
         }
