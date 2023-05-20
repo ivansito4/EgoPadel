@@ -26,7 +26,7 @@ namespace EgoPadel.Models
         public UsuarioApp UsuarioApp { get; set; }
 
         [Required(ErrorMessage = "Hora y Fecha de Pista obligatorio.")]
-        public DateTime HoraInicio { get; set; }
+        public string HoraInicio { get; set; }
 
         [Required(ErrorMessage = "Duración de Pista obligatoria.")]
         public int Duracion { get; set; }
