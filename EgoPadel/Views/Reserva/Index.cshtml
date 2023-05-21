@@ -20,6 +20,9 @@
                 @Html.DisplayNameFor(model => model.UsuarioApp.UserName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FechaReserva)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.HoraInicio)
             </th>
             <th>
@@ -39,6 +42,9 @@
             </td>
             <td>
                     @Html.DisplayFor(modelItem => item.UsuarioApp.UserName)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.FechaReserva)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HoraInicio)

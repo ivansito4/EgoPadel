@@ -25,14 +25,17 @@ namespace EgoPadel.Models
         [ForeignKey(nameof(UsuarioId))]
         public UsuarioApp UsuarioApp { get; set; }
 
-        [Required(ErrorMessage = "Hora y Fecha de Pista obligatorio.")]
+        [Required(ErrorMessage = "Fecha de Reserva obligatoria.")]
+        public string FechaReserva { get; set; }
+
+        [Required(ErrorMessage = "Hora de Reserva obligatoria.")]
         public string HoraInicio { get; set; }
 
         [Required(ErrorMessage = "Duración de Pista obligatoria.")]
         public int Duracion { get; set; }
 
         [Required(ErrorMessage = "El Precio de la reserva es Requerido")]
-        [Range(1, int.MaxValue, ErrorMessage = "El Precio tiene que ser mayor a cero")]
+        
         public double Precio { get; set; }
     }
 }

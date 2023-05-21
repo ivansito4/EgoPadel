@@ -24,7 +24,9 @@ namespace EgoPadel.Controllers
         //Get
         public IActionResult Crear()
         {
-            
+            string[] horas = new string[] { "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
+            ViewBag.horas = horas;
+
             IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
             {
                 Text = c.Numero.ToString(),
@@ -74,6 +76,9 @@ namespace EgoPadel.Controllers
             return View(reservaVM);
 
         }
+
+        
+        
 
         //Get
         public IActionResult Editar(int? Id)
