@@ -2,8 +2,11 @@
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace EgoPadel.Controllers
 {
@@ -22,10 +25,12 @@ namespace EgoPadel.Controllers
         }
 
         //Get
-        public IActionResult Crear()
+        public async Task<IActionResult> Crear()
         {
             string[] horas = new string[] { "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00" };
             ViewBag.horas = horas;
+
+            ViewBag.Reservas = await _db.ReservaPista.ToListAsync();
 
             IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
             {
