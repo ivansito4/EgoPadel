@@ -1,39 +1,33 @@
-﻿@model IEnumerable<EgoPadel.Models.Torneo>
+﻿@model EgoPadel.Models.ViewModels.TorneoVM
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="~/css/loginRegister.css" rel="stylesheet" />
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Crear">Crear nuevo</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NroPlazas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Premio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+@if (User.IsInRole(WC.AdminRol))
+{
+    <p>
+        <a asp-action="Crear">Crear nuevo</a>
+    </p>
+}
+
+<div class="text-center">
+    <button class="btn btn-dark filter-button" data-filter="all">Todos</button>
+    @*@foreach (var torneo in Model.Torneo)
+    {
+        <button class="btn btn-outline-secondary filter-button" data-filter="@torneo.Tipo.Replace(' ','_')">
+            @torneo.Tipo
+        </button>
+    }*@
+    <button class="btn btn-outline-secondary filter-button" data-filter="torneos">Torneos</button>
+    <button class="btn btn-outline-secondary filter-button" data-filter="pozos">Pozos</button>
+</div>
+@foreach (var item in Model.Torneo) {
+       @* <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Tipo)
             </td>
@@ -53,7 +47,31 @@
                 <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
             </td>
-        </tr>
+        </tr>*@
+
+    <div class="col-lg-4 col-md-6 pb-4">
+        <!-- Card-->
+        <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+            <div class="card-body px-3 pt-3 pb-1 row">
+                <div class="col-7"><label class="float-left">@Html.DisplayFor(modelItem => item.Tipo)</label></div>
+                <div class="col-5"><label class="float-right"><span class="text-info h5">@Html.DisplayFor(modelItem => item.Tipo)</span> / m &sup2;</label> </div>
+            </div>
+            <img class="card-img-top img-fluid d-block mx-auto mb-3" src="" alt="Imagen Card">
+            <div class="card-body p-1 px-3 row">
+                <div class="col-6">
+                    <span class="badge p-2 border w-100 text-dark" style="background-color:lavenderblush">@Html.DisplayFor(modelItem => item.Fecha)</span>
+                </div>
+                <div class="col-6 border-0">
+                    <span class="badge p-2 border w-100 text-dark" style="background-color:aliceblue">@Html.DisplayFor(modelItem => item.NroPlazas)</span>
+                </div>
+                <div class="col-12 pt-2" style="font-size:13px; text-align:justify">
+                    <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                </div>
+                <div class="col-12 p-1">
+                    <a asp-action="Detalle" asp-route-Id="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-dark form-control btn-sm p-2" style="height:40px">Ver Detalle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
-    </tbody>
-</table>

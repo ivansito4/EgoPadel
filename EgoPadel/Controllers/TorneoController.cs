@@ -1,5 +1,6 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
+using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EgoPadel.Controllers
@@ -14,8 +15,11 @@ namespace EgoPadel.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Torneo> listaTorneo = _db.Torneo;
-            return View(listaTorneo);
+			TorneoVM torneovm = new TorneoVM()
+			{
+				Torneo=_db.Torneo
+			};
+            return View(torneovm);
         }
 
         //Get

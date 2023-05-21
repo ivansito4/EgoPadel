@@ -4,6 +4,7 @@ using EgoPadel.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EgoPadel.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518193705_cambiarTipoTorneo")]
+    partial class cambiarTipoTorneo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,13 +239,8 @@ namespace EgoPadel.Migrations
                     b.Property<int>("Duracion")
                         .HasColumnType("int");
 
-                    b.Property<string>("FechaReserva")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HoraInicio")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("HoraInicio")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PistaId")
                         .HasColumnType("int");
@@ -283,9 +281,8 @@ namespace EgoPadel.Migrations
                     b.Property<string>("Premio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte>("Tipo")
+                        .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 

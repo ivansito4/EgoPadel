@@ -10,7 +10,7 @@ namespace EgoPadel.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Tipo del Torneo obligatorio.")]
-        public byte Tipo { get; set; }
+        public string Tipo { get; set; }
 
         [Required(ErrorMessage = "Fecha del Torneo obligatoria.")]
         public DateTime Fecha { get; set; }
