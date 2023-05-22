@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+<div style="margin-left:15%;">
 @if (User.IsInRole(WC.AdminRol))
 {
     <p>
@@ -21,9 +21,10 @@
             @torneo.Tipo
         </button>
     }*@
-    <button class="btn btn-outline-secondary filter-button" data-filter="torneos">Torneos</button>
-    <button class="btn btn-outline-secondary filter-button" data-filter="pozos">Pozos</button>
+    <button class="btn btn-outline-secondary filter-button" data-filter="Torneo">Torneos</button>
+    <button class="btn btn-outline-secondary filter-button" data-filter="Pozo">Pozos</button>
 </div>
+    <div class=" contenedor-cards">
 @foreach (var item in Model.Torneo) {
        @* <tr>
             <td>
@@ -47,12 +48,13 @@
             </td>
         </tr>*@
 
-    <div class="col-lg-4 col-md-6 pb-2 contenedor-cards" >
+    
         <!-- Card-->
-        <div class="card-torneo bg-white rounded shadow-sm" style="float:left">
-            <div class="card-body px-3 pt-3 pb-1 row">
-                <div class="col-5" style="margin-left:33%;"><label class="titulo-card"><span class="text-info h1">@Html.DisplayFor(modelItem => item.Tipo)<br /></span></label> </div>
+            <div class="card-torneo bg-white rounded shadow-sm filter @item.Tipo.Replace(' ','_')">
+            <div class="card-body">
+                <div class="col-5" ><label class="titulo-card"><span class="text-info h1">@Html.DisplayFor(modelItem => item.Tipo)<br /></span></label> </div>
             </div>
+            <br>
             <div class="card-body p-1 px-3 row">
                 <div class="col-6">
                     <span class="badge p-3 border w-100 text-dark" style="background-color:lavenderblush">Hora:<br><br>@Html.DisplayFor(modelItem => item.Fecha)</span>
@@ -68,6 +70,35 @@
                 </div>
             </div>
         </div>
-    </div>
 
+
+		}
+	</div>
+    <div>
+        Página 1 de 1
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+            $(document).ready(function(){
+
+            $(".filter-button").click(function(){
+
+                var value = $(this).attr('data-filter');
+                if(value == "all")
+                {
+                    $('.filter').show('1000');
+                }
+                else
+                {
+                    $(".filter").not('.'+value).hide('3000');  //se esconden los que no tengan el value
+                    $('.filter').filter('.'+value).show('3000');  //se muestran los que si lo tengan
+
+                }
+            });
+
+        });
+    </script>
 }
