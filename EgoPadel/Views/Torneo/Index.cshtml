@@ -1,12 +1,10 @@
 ﻿@model EgoPadel.Models.ViewModels.TorneoVM
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Torneos y Pozos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href="~/css/loginRegister.css" rel="stylesheet" />
-<h1>Index</h1>
 
 @if (User.IsInRole(WC.AdminRol))
 {
@@ -14,7 +12,7 @@
         <a asp-action="Crear">Crear nuevo</a>
     </p>
 }
-
+<br />
 <div class="text-center">
     <button class="btn btn-dark filter-button" data-filter="all">Todos</button>
     @*@foreach (var torneo in Model.Torneo)
@@ -49,23 +47,21 @@
             </td>
         </tr>*@
 
-    <div class="col-lg-4 col-md-6 pb-4">
+    <div class="col-lg-4 col-md-6 pb-2 contenedor-cards" >
         <!-- Card-->
-        <div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+        <div class="card-torneo bg-white rounded shadow-sm" style="float:left">
             <div class="card-body px-3 pt-3 pb-1 row">
-                <div class="col-7"><label class="float-left">@Html.DisplayFor(modelItem => item.Tipo)</label></div>
-                <div class="col-5"><label class="float-right"><span class="text-info h5">@Html.DisplayFor(modelItem => item.Tipo)</span> / m &sup2;</label> </div>
+                <div class="col-5" style="margin-left:33%;"><label class="titulo-card"><span class="text-info h1">@Html.DisplayFor(modelItem => item.Tipo)<br /></span></label> </div>
             </div>
-            <img class="card-img-top img-fluid d-block mx-auto mb-3" src="" alt="Imagen Card">
             <div class="card-body p-1 px-3 row">
                 <div class="col-6">
-                    <span class="badge p-2 border w-100 text-dark" style="background-color:lavenderblush">@Html.DisplayFor(modelItem => item.Fecha)</span>
+                    <span class="badge p-3 border w-100 text-dark" style="background-color:lavenderblush">Hora:<br><br>@Html.DisplayFor(modelItem => item.Fecha)</span>
                 </div>
                 <div class="col-6 border-0">
-                    <span class="badge p-2 border w-100 text-dark" style="background-color:aliceblue">@Html.DisplayFor(modelItem => item.NroPlazas)</span>
+                    <span class="badge p-3 border w-100 text-dark" style="background-color:aliceblue">Número plazas: <br><br>@Html.DisplayFor(modelItem => item.NroPlazas)</span>
                 </div>
-                <div class="col-12 pt-2" style="font-size:13px; text-align:justify">
-                    <p>@Html.DisplayFor(modelItem => item.Descripcion)</p>
+                <div>
+                    <br>
                 </div>
                 <div class="col-12 p-1">
                     <a asp-action="Detalle" asp-route-Id="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-dark form-control btn-sm p-2" style="height:40px">Ver Detalle</a>
