@@ -4,7 +4,7 @@
     ViewData["Title"] = "Tienda";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/cardsTienda.css"/>
+<link rel="stylesheet" href="~/css/cardsTienda.css" asp-append-version="true" />
 
 @if (User.IsInRole(WC.AdminRol))        //Si es un admin permite añadir un producto nuevo
 {
@@ -30,10 +30,9 @@
     @foreach (var item in Model.Producto)
     {
         <div class="card-tienda">
-            <div class="image" style="background-image: url(~/images/logo.png);background-size: contain; background-repeat: no-repeat;"><span class="text"></span></div>
-            
-            <h2 class="title">@item.Nombre</h2>
-            <span class="price">@item.Precio €</span>
+            <img class="imagen-prod" src="~/images/logo.png">
+            <h4 class="titulo text-dark">@item.Nombre</h4>
+            <span class="price text-dark">@item.Precio,00 €</span>
             <div class="col-12 p-1">
                 <a asp-action="Detalle" asp-route-Id="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-warning form-control btn-sm p-2" style="height:40px">Ver Detalles</a>
             </div>
