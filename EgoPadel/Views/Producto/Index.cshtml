@@ -1,11 +1,10 @@
-﻿@model IEnumerable<EgoPadel.Models.Producto>
+﻿@model EgoPadel.Models.ViewModels.ProductoVM
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tienda";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Productos</h1>
+<link rel="stylesheet" href="~/css/cardsTienda.css"/>
 
 @if (User.IsInRole(WC.AdminRol))        //Si es un admin permite añadir un producto nuevo
 {
@@ -14,52 +13,59 @@
     </p>
 }
 
-@if (Model.Count() > 0)
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Precio)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Descripcion)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Foto)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nombre)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Precio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Descripcion)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Foto)
-                    </td>
-                    <td>
-                        <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
-                        <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <h2>En este momento no hay Productos disponibles.</h2>
-}
+<div class="text-center">
+    <button class="btn btn-dark filter-button" data-filter="all">Todos</button>
+    @*@foreach (var torneo in Model.Torneo)
+    {
+    <button class="btn btn-outline-secondary filter-button" data-filter="@torneo.Tipo.Replace(' ','_')">
+    @torneo.Tipo
+    </button>
+    }*@
+    <button class="btn btn-outline-secondary filter-button" data-filter="Pala">Palas</button>
+    <button class="btn btn-outline-secondary filter-button" data-filter="Pelota">Pelotas</button>
+    <button class="btn btn-outline-secondary filter-button" data-filter="Ropa">Ropa</button>
+</div>
+
+<div class=" contenedor-cartas">
+    @foreach (var item in Model.Producto)
+    {
+        <div class="card-tienda">
+            <div class="image" style="background-image: url(~/images/logo.png);background-size: contain; background-repeat: no-repeat;"><span class="text"></span></div>
+            
+            <h2 class="title">@item.Nombre</h2>
+            <span class="price">@item.Precio €</span>
+            <div class="col-12 p-1">
+                <a asp-action="Detalle" asp-route-Id="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-warning form-control btn-sm p-2" style="height:40px">Ver Detalles</a>
+            </div>
+        </div>
+        <!-- Card-->
+        @*<div class="card-torneo bg-white rounded shadow-sm filter @item.Tipo.Replace(' ','_')">
+            <div class="card-body">
+                <div class="col-5"><label class="titulo-card"><span class="text-info h1">@Html.DisplayFor(modelItem => item.Tipo)<br /></span></label> </div>
+            </div>
+            <br>
+            <div class="card-body p-1 px-3 row">
+                <div class="col-6">
+                    <span class="badge p-3 border w-100 text-dark" style="background-color:lavenderblush">Hora:<br><br>@Html.DisplayFor(modelItem => item.Fecha)</span>
+                </div>
+                <div class="col-6 border-0">
+                    <span class="badge p-3 border w-100 text-dark" style="background-color:aliceblue">Número plazas: <br><br>@Html.DisplayFor(modelItem => item.NroPlazas)</span>
+                </div>
+                <div>
+                    <br>
+                </div>
+                <div class="col-12 p-1">
+                    <a asp-action="Detalle" asp-route-Id="@Html.DisplayFor(modelItem => item.Id)" class="btn btn-dark form-control btn-sm p-2" style="height:40px">Ver Detalle</a>
+                </div>
+            </div>
+        </div>*@
+
+
+    }
+</div>
+<div>
+    Página 1 de 1
+</div>
+</div>
+
+
