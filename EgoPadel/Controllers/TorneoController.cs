@@ -22,6 +22,17 @@ namespace EgoPadel.Controllers
             return View(torneovm);
         }
 
+        public IActionResult Detalle(int Id)
+        {
+            DetalleTorneoVM detalleVM = new DetalleTorneoVM()
+            {
+                Torneo = _db.Torneo.Where(p => p.Id == Id).FirstOrDefault(),
+                UsuarioRegistrado = false
+            };
+
+            return View(detalleVM);
+        }
+
         //Get
         public IActionResult Crear()
         {
