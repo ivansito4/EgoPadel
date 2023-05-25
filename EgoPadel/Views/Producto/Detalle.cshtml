@@ -1,0 +1,66 @@
+﻿@model EgoPadel.Models.ViewModels.DetalleProductoVM
+
+@{
+    ViewData["Title"] = "Detalle del producto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+
+    <div class="container backgroundWhite pt-4">
+        <div class="card-detalle" style="border:1px solid #000000; ">
+            <div class="card-header bg-dark text-light ml-0 row container" style="border-radius: 0px;">
+                <div class=" col-12 col-md-6 p-2">
+                    <h1 class="text-white">@Model.Producto.Nombre </h1>
+                </div>
+                <div class="col-12 col-md-6 text-md-end p-2">
+                    <h1 class="text-warning"> @((Model.Producto.Precio).ToString("c"))</h1>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container rounded p-2">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 p-1 text-center">
+                            <img src="~/fotosProductos/@Model.Producto.Foto" width="300px" class="rounded" style="position:relative; left:-160px;"/>
+                        </div>
+                        <div class="col-12 col-lg-8">
+                            <div class="row pl-3">
+
+                                <div class="col-12">
+                                    <p class="text-secondary">@Html.Raw(Model.Producto.Descripcion)</p>
+                                    <div class="row p-5" style="position:absolute;bottom:0; align-content:center;">
+                                        <div class="col-12 ">
+                                            <a asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px; width:150px;">Regresar</a>
+
+                                            @if (Model.ExisteEnCarrito)
+                                            {
+                                                <a asp-action="QuitarCarrito" asp-route-Id="@Model.Producto.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;width:250px;">Quitar del carrito</a>
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;width:250px;">Añadir al carrito</button>
+                                            }
+                                            @if (User.IsInRole(WC.AdminRol))
+                                            {
+                                                <br />
+
+                                                <br />
+                                                <p style="color:black;">Administración:</p>
+                                                <a asp-action="Editar" asp-route-Id="@Model.Producto.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;width:150px;">Editar</a>
+                                                <a asp-action="Borrar" asp-route-Id="@Model.Producto.Id" class="btn btn-danger btn-square form-control btn-lg" style="height:50px;width:150px;">Eliminar</a>
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

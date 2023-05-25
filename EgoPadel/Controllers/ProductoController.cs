@@ -2,6 +2,7 @@
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EgoPadel.Controllers
 {
@@ -21,6 +22,19 @@ namespace EgoPadel.Controllers
             };
             return View(productovm);
         }
+
+        public IActionResult Detalle(int Id)
+        {
+            DetalleProductoVM detalleVM = new DetalleProductoVM()
+            {
+                Producto = _db.Producto.Where(p => p.Id == Id).FirstOrDefault(),
+                ExisteEnCarrito = false
+            };
+
+            return View(detalleVM);
+        }
+
+
 
         //Get
         public IActionResult Crear()
@@ -95,5 +109,6 @@ namespace EgoPadel.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
+
     }
 }
