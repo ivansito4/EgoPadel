@@ -5,7 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
-    <link href="~/css/Reserva.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/Reserva.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 </head>
 <h1>Crear</h1>
@@ -113,7 +117,8 @@
 else
 {
     <div class="contenedorNoInicioSesion">
-        <h1>Para realizar una reserva es necesario iniciar sesión</h1>
+        <img src="~/images/inicio.png" id="imagenSesion">
+        <h1 class="texto">Para realizar una reserva es necesario iniciar sesión</h1>
         <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Login" class="link">Iniciar Sesión</a></button>
         <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Register" class="link">Registarse</a></button>
     </div>

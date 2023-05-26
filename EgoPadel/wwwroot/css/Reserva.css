@@ -2,22 +2,42 @@
 }
 
 .contenedorNoInicioSesion{
-    margin: 0px auto;
+    position: relative;
+    left: 35%;
+    padding: 0px 0px 80px 0px;
     background-color: white;
     color: black;
-    width: 500px;
-    height: 300px;
+    width: 600px;
+    height: 400px;
     text-align: center;
     border-radius: 10px;
-    
+}
+
+.texto {
+    margin-top: 20px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+#imagenSesion{
+    margin-top: 20px;
+    width: 150px;
+    height: 150px;
 }
 
 .link {
     color: white;
     text-decoration: none;
+    font-size: 30px;
+}
+
+.link:hover {
+    text-decoration: none;
+    color: white;
 }
 
 .boton{
+    margin-top: 20px;
     border-radius: 5px;
     width: 200px;
+    height: 70px;
 }
