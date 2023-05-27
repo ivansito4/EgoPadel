@@ -1,5 +1,7 @@
 ﻿using EgoPadel.Datos;
+using EgoPadel.Infrastructura;
 using EgoPadel.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
