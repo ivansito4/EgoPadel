@@ -1,6 +1,8 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol;
 
 namespace EgoPadel.Controllers
 {
@@ -12,10 +14,14 @@ namespace EgoPadel.Controllers
         {
             _db = db;  
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            IEnumerable<Equipo> listaEquipo = _db.Equipo;
-            return View(listaEquipo);
+            var equipos = from e in _db.Equipo
+                          select e;
+
+            equipos = equipos.OrderByDescending(e => e.Puntos);
+           
+            return View(await equipos.AsNoTracking().ToListAsync());
         }
 
         //Get

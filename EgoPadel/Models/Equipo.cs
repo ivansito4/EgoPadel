@@ -15,5 +15,10 @@ namespace EgoPadel.Models
 
         [DefaultValue(0)]
         public int Puntos { get; set; }
+
+        internal static dynamic OrderByDescending(Func<object, object> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
