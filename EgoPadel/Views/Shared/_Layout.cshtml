@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAcessor
+@using EgoPadel.Utilidades
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,7 +13,7 @@
     <link rel="stylesheet" href="~/EgoPadel.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/fontawesome/css/all.css" />
 </head>
-<body>
+<body> 
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom border-light box-shadow mb-3">
             <div class="container-fluid">
@@ -29,9 +33,26 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Torneo" asp-action="Index">Torneos y Pozos</a>
-                        </li>
+                        </li> 
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Producto" asp-action="Index">Tienda</a>
+                        </li>
+                        <li>
+                            @if (HttpContextAcessor.HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito) != null)
+                            {
+                                <a asp-action="Index" asp-controller="Carrito" class="nav-link">
+                                    @{
+                                        var count = HttpContextAcessor.HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito);
+                                    }
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                                </a>
+                            }
                         </li>
                         @if (User.IsInRole(WC.AdminRol))
                         {
