@@ -1,31 +1,22 @@
-﻿@model IEnumerable<EgoPadel.Models.Equipo>
+﻿@model IEnumerable<EgoPadel.Models.UsuarioApp>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
-    <script type="text/javascript" src="~/js/ClasEquipos.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 
 </head>
-<h1>Clasificación Por Equipos</h1>
+<h1>Clasificación Individual</h1>
 
-<p>
-    <a asp-action="Crear">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.FotoEscudo)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Nombre)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nombre)
+                @Html.DisplayNameFor(model => model.Apellidos)
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Puntos)</a>
@@ -38,10 +29,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FotoEscudo)
+                    @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nombre)
+                    @Html.DisplayFor(modelItem => item.Apellidos)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Puntos)
@@ -51,9 +42,10 @@
                     <td>
                         <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
                     <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
-                </td>
+                    </td>
                 }
             </tr>
         }
     </tbody>
 </table>
+

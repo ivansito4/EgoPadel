@@ -8,6 +8,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace EgoPadel.Controllers
 {
@@ -19,6 +20,7 @@ namespace EgoPadel.Controllers
         {
             _db = db;  
         }
+
         public IActionResult Index()
         {
             IEnumerable<ReservaPista> listaReserva = _db.ReservaPista.Include(c => c.Pista).Include(p => p.UsuarioApp);
@@ -29,7 +31,7 @@ namespace EgoPadel.Controllers
         public IActionResult Crear()
         {
             
-            ViewBag.Reservas =  _db.ReservaPista.ToJson();
+            ViewBag.Reservas =  _db.ReservaPista.ToJson();            
             
             IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
             {
