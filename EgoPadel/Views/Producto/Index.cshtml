@@ -56,7 +56,7 @@
                     var texto="^."+value;
                     $(".filter").hide();
                     
-                    $(".filter").match(texto).show('3000');  //se esconden los que no tengan el value
+                    $(".filter").some(texto).show('3000'); 
 
                 }
             });
