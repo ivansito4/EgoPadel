@@ -51,7 +51,6 @@ namespace EgoPadel.Controllers
                 {
                     files[0].CopyTo(fileStream);
                 }
-
                 equipo.FotoEscudo = fileName + extension;
                 _db.Equipo.Add(equipo);
                 _db.SaveChanges();
