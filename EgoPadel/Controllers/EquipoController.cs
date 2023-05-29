@@ -11,10 +11,12 @@ namespace EgoPadel.Controllers
     public class EquipoController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public EquipoController(ApplicationDbContext db)
+        public EquipoController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;  
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> Index()
         {
@@ -38,6 +40,19 @@ namespace EgoPadel.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                string upload = webRootPath + WC.FotoEscudo;
+                string fileName = Guid.NewGuid().ToString();
+                string extension = Path.GetExtension(files[0].FileName);
+
+                using(var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+                }
+
+                equipo.FotoEscudo = fileName + extension;
                 _db.Equipo.Add(equipo);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
@@ -66,6 +81,8 @@ namespace EgoPadel.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _webHostEnvironment.WebRootPath;
                 _db.Equipo.Update(equipo);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
