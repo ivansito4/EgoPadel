@@ -17,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom border-light box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/logo.png" /></a>
+                <a class="navbar-brand "  asp-controller="Home" asp-action="Index"><img id="logo" src="~/images/logo.png" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -26,27 +26,39 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Página principal</a>
+                            <a class="nav-link text-white"  asp-controller="Home" asp-action="Index">Página principal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Reserva" asp-action="Crear">Reservar Pista</a>
+                            <a class="nav-link text-white"  asp-controller="Reserva" asp-action="Crear">Reservar Pista</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Torneo" asp-action="Index">Torneos y Pozos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Producto" asp-action="Index">Tienda</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Clasificaciones
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Partidos
                             </a>
                             <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Equipo" asp-action="Index">Crear Partido</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="ClasInd" asp-action="Index">Buscar Partido</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Clasificaciones
+                            </a>
+                            <ul class="dropdown-menu ">
                                 <li>
                                     <a class="dropdown-item" asp-area="" asp-controller="Equipo" asp-action="Index">Clasificación Por Equipos</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="ClasInd" asp-action="Index">Clasificación Individual</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Producto" asp-action="Index">Tienda</a>
                         </li>
                         <li>
                             @if (HttpContextAccessor.HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito) != null)
@@ -55,13 +67,13 @@
                                     @{
                                         var count = HttpContextAccessor.HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito).Count();
                                     }
-                                    <i class="fas fa-shopping-cart"></i> &nbsp; (@count)
+                                    <i class="fas fa-shopping-cart text-white"></i> &nbsp; (@count)
                                 </a>
                             }
                             else
                             {
                                 <a href="#" class="nav-link">
-                                    <i class="fas fa-shopping-cart"></i> &nbsp; (0)
+                                    <i class="fas fa-shopping-cart text-white"></i> &nbsp; (0)
                                 </a>
                             }
                         </li>
@@ -69,21 +81,21 @@
                         @if (User.IsInRole(WC.AdminRol))
                         {
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Administración
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Crear administrador</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Producto" asp-action="Index">Administrar Productos</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Empleado" asp-action="Index">Administrar Empleados</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Equipo" asp-action="Index">Administrar Equipos</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="ParticipantesIndividual" asp-action="Index">Administrar Participantes Torneo (Individual)</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="ParticipantesEquipo" asp-action="Index">Administrar Participantes Torneo (Equipo)</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Reserva" asp-action="Index">Administrar Reservas</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Torneo" asp-action="Index">Administrar Torneos</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Pista" asp-action="Index">Administrar Pistas</a>
-                                        <a class="dropdown-item" asp-area="" asp-controller="Pedido" asp-action="Index">Administrar Pedidos</a>
+                                        <a class="dropdown-item" asp-controller="Producto" asp-action="Index">Administrar Productos</a>
+                                        <a class="dropdown-item" asp-controller="Empleado" asp-action="Index">Administrar Empleados</a>
+                                        <a class="dropdown-item" asp-controller="Equipo" asp-action="Index">Administrar Equipos</a>
+                                        <a class="dropdown-item" asp-controller="ParticipantesIndividual" asp-action="Index">Administrar Participantes Torneo (Individual)</a>
+                                        <a class="dropdown-item" asp-controller="ParticipantesEquipo" asp-action="Index">Administrar Participantes Torneo (Equipo)</a>
+                                        <a class="dropdown-item" asp-controller="Reserva" asp-action="Index">Administrar Reservas</a>
+                                        <a class="dropdown-item" asp-controller="Torneo" asp-action="Index">Administrar Torneos</a>
+                                        <a class="dropdown-item" asp-controller="Pista" asp-action="Index">Administrar Pistas</a>
+                                        <a class="dropdown-item" asp-controller="Pedido" asp-action="Index">Administrar Pedidos</a>
 
 
                                     </li>
