@@ -1,6 +1,7 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
+using EgoPadel.Utilidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,13 +26,61 @@ namespace EgoPadel.Controllers
 
         public IActionResult Detalle(int Id)
         {
+            List<Carrito> carritoLista = new List<Carrito>();
+            if (HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito) != null &&
+                HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito).Count() > 0)
+            {
+                carritoLista = HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito);
+            }
+
             DetalleProductoVM detalleVM = new DetalleProductoVM()
             {
                 Producto = _db.Producto.Where(p => p.Id == Id).FirstOrDefault(),
                 ExisteEnCarrito = false
             };
 
+            foreach (var item in carritoLista)
+            {
+                if(item.ProductoId == Id)
+                {
+                    detalleVM.ExisteEnCarrito = true;
+                }
+            }
+
             return View(detalleVM);
+        }
+
+        [HttpPost , ActionName("Detalle")]
+        public IActionResult DetallePost(int Id)
+        {
+            List<Carrito> carritoLista = new List<Carrito>();
+            if (HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito)!=null && 
+                HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito).Count()>0)
+            {
+                carritoLista = HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito);
+            }
+            carritoLista.Add(new Carrito { ProductoId = Id });
+            HttpContext.Session.Set(WC.SessionCarrito, carritoLista);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult QuitarCarrito(int Id)
+        {
+            List<Carrito> carritoLista = new List<Carrito>();
+            if (HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito) != null &&
+                HttpContext.Session.Get<IEnumerable<Carrito>>(WC.SessionCarrito).Count() > 0)
+            {
+                carritoLista = HttpContext.Session.Get<List<Carrito>>(WC.SessionCarrito);
+            }
+            
+            var productoAQuitar = carritoLista.SingleOrDefault(x=>x.ProductoId == Id);
+            if(productoAQuitar != null)
+            {
+                carritoLista.Remove(productoAQuitar);
+            }
+
+            HttpContext.Session.Set(WC.SessionCarrito, carritoLista);
+            return RedirectToAction(nameof(Index));
         }
 
 

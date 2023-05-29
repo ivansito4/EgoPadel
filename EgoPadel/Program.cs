@@ -34,6 +34,15 @@ builder.Services.AddAuthentication().AddFacebook(options =>
     options.AppSecret = "40c14af9957bcf1f00966d2cdb16a30f";
 });
 
+//Para tener sesiones
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSession(Options =>
+{
+    Options.IdleTimeout = TimeSpan.FromMinutes(10);
+    Options.Cookie.HttpOnly = true;
+    Options.Cookie.IsEssential = true;
+});
+
 
 builder.Services.AddControllersWithViews();
 
@@ -56,7 +65,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//app.UseSession();   MIRAR ?????????????????????????????????????????????????????
+//Pipeline para usar sesiones
+app.UseSession();  
 
 //La libreria de usuarios necesita usar el modelo Razor
 app.MapRazorPages(); 
