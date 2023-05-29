@@ -1,6 +1,7 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using System.Diagnostics;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace EgoPadel.Controllers
 {
@@ -31,8 +33,8 @@ namespace EgoPadel.Controllers
         public IActionResult Crear()
         {
             
-            ViewBag.Reservas =  _db.ReservaPista.ToJson();            
-            
+            ViewBag.Reservas =  _db.ReservaPista.ToJson();
+
             IEnumerable<SelectListItem> pistaDropDown = _db.Pista.Select(c => new SelectListItem
             {
                 Text = c.Numero.ToString(),
@@ -75,6 +77,8 @@ namespace EgoPadel.Controllers
         {
             if (!ModelState.IsValid)
             {
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                reservaVM.Reserva.UsuarioId = userId;
                 _db.ReservaPista.Add(reservaVM.Reserva);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit

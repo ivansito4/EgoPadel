@@ -38,20 +38,30 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(Equipo equipo)
         {
+
             if (ModelState.IsValid)
             {
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
 
                 string upload = webRootPath + WC.FotoEscudo;
-                string fileName = Guid.NewGuid().ToString();
-                string extension = Path.GetExtension(files[0].FileName);
-
-                using(var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+              
+                if (files.Count()==0)
                 {
-                    files[0].CopyTo(fileStream);
+                    equipo.FotoEscudo = @"default.png";
                 }
-                equipo.FotoEscudo = fileName + extension;
+                else
+                {
+                    string fileName = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+                    equipo.FotoEscudo = fileName + extension;
+                }
+                
                 _db.Equipo.Add(equipo);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
