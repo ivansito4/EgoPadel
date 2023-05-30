@@ -3,6 +3,7 @@ using EgoPadel.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
+using System.Security.Claims;
 
 namespace EgoPadel.Controllers
 {
@@ -20,6 +21,8 @@ namespace EgoPadel.Controllers
                           select u;
 
             usuarios = usuarios.OrderByDescending(u => u.Puntos);
+
+            ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             return View(await usuarios.AsNoTracking().ToListAsync());
         }

@@ -27,7 +27,9 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            @if (ViewBag.userId == item.Id)
+            {
+            <tr style="background-color:grey;">
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -45,6 +47,26 @@
                     </td>
                 }
             </tr>
+            }else{
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Puntos)
+                    </td>
+                    @if (User.IsInRole(WC.AdminRol))
+                    {
+                        <td>
+                            <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                            <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
+                        </td>
+                    }
+                </tr>
+            }
         }
     </tbody>
 </table>

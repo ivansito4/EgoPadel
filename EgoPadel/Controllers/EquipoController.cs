@@ -28,6 +28,17 @@ namespace EgoPadel.Controllers
             return View(await equipos.AsNoTracking().ToListAsync());
         }
 
+        public async Task<IActionResult> Buscar()
+        {
+            var equipos = from e in _db.Equipo
+                          join u in _db.UsuarioApp on e.Id equals u.EquipoId into u2
+                          select e;
+
+            
+
+            return View(await equipos.AsNoTracking().ToListAsync());
+        }
+
         //Get
         public IActionResult Crear()
         {
