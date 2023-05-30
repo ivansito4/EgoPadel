@@ -18,11 +18,12 @@
             <ul class="dropdown-menu" >
                 <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Mi Perfil</a></li>
                 @if(true){
-                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Crear">Crear/Buscar Equipo</a></li>
+                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Crear">Crear Equipo</a></li>
+                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Buscar">Buscar Equipo</a></li>
                 }
                 else
                 {
-                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Crear">Mi Equipo</a></li>
+                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Detalle">Mi Equipo</a></li>
                     @*Esto es tu parte jeje*@
                 }
                 

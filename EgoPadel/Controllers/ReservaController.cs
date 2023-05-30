@@ -75,15 +75,12 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(ReservaVM reservaVM)
         {
-            if (!ModelState.IsValid)
-            {
                 string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 reservaVM.Reserva.UsuarioId = userId;
                 _db.ReservaPista.Add(reservaVM.Reserva);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
-            }
-            return View(reservaVM);
+            
 
         }
 

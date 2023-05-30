@@ -1,7 +1,9 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
+using EgoPadel.Utilidades;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 
 namespace EgoPadel.Controllers
 {
@@ -24,6 +26,7 @@ namespace EgoPadel.Controllers
 
         public IActionResult Detalle(int Id)
         {
+            
             DetalleTorneoVM detalleVM = new DetalleTorneoVM()
             {
                 Torneo = _db.Torneo.Where(p => p.Id == Id).FirstOrDefault(),
@@ -31,6 +34,24 @@ namespace EgoPadel.Controllers
             };
 
             return View(detalleVM);
+        }
+
+        [HttpPost, ActionName("Detalle")]
+        public IActionResult DetallePost(int Id)
+        {
+            //Si entra aquí se registra el usuario en el torneo
+            string nombreUsuario = User.Identity.Name;
+
+            ParticipantesIndividual participantesIndividual = new ParticipantesIndividual()
+            {
+                TorneoId = Id,
+                UsuarioId = nombreUsuario
+            };
+
+            _db.ParticipantesIndividual.Add(participantesIndividual);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
 
         //Get
