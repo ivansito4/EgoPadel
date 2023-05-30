@@ -1,9 +1,14 @@
-﻿@model EgoPadel.Models.ViewModels.DetalleTorneoVM
+﻿
+@model EgoPadel.Models.ViewModels.DetalleTorneoVM
+
+
 
 @{
     ViewData["Title"] = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (User.IsInRole(WC.AdminRol) | User.IsInRole(WC.UsuarioRol))
+{
 <form method="post">
 
     <div class="container backgroundWhite pt-4" >
@@ -35,6 +40,7 @@
                                         <div class="col-12 ">
                                             <a asp-action="Index" class="btn btn-success btn-square form-control btn-lg" style="height:50px; width:150px;">Regresar</a>
                                         
+
                                             @if (Model.UsuarioRegistrado)
                                             {
                                                 <a asp-action="Desapuntar" asp-route-Id="@Model.Torneo.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;width:150px;">Desapuntarme</a>
@@ -67,3 +73,12 @@
         </div>
     </div>
 </form>
+}
+else{
+    <div class="contenedorNoInicioSesion">
+        <img src="~/images/inicio.png" id="imagenSesion">
+        <h1 class="texto">Para realizar una reserva es necesario iniciar sesión</h1>
+        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Login" class="link">Iniciar Sesión</a></button>
+        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Register" class="link">Registarse</a></button>
+    </div>
+}

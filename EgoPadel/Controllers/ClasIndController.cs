@@ -6,11 +6,11 @@ using NuGet.Protocol;
 
 namespace EgoPadel.Controllers
 {
-    public class ClasInd : Controller
+    public class ClasIndController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ClasInd(ApplicationDbContext db)
+        public ClasIndController(ApplicationDbContext db)
         {
             _db = db;
         }
