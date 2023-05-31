@@ -3,8 +3,11 @@ using EgoPadel.Infrastructura;
 using EgoPadel.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NuGet.Protocol;
+using System.Text.RegularExpressions;
 
 namespace EgoPadel.Controllers
 {
@@ -25,6 +28,21 @@ namespace EgoPadel.Controllers
 
             equipos = equipos.OrderByDescending(e => e.Puntos);
            
+            return View(await equipos.AsNoTracking().ToListAsync());
+        }
+
+        public async Task<IActionResult> Buscar()
+        {
+            var equipos = from equipo in _db.Equipo
+                        join user in _db.UsuarioApp
+                        on equipo.Id equals user.EquipoId
+                        select equipo;
+
+            //"SELECT e.Id FROM Equipo AS e INNER JOIN AspNetUsers AS a ON e.Id = a.EquipoId GROUP BY e.Id HAVING(COUNT(e.Id) < 2)"
+
+
+
+
             return View(await equipos.AsNoTracking().ToListAsync());
         }
 
