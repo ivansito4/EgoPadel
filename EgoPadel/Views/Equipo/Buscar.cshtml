@@ -26,16 +26,7 @@
         </tr>
     </thead>
     <tbody id="tbody">
-@foreach (var item in Model) {
-    
-        
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-        }
+
         
     </tbody>
 </table>
@@ -44,15 +35,16 @@
     let listaEquipos = JSON.parse(equipos);
     
     let listaEquiposDisponible = [];
-
-    for(let i=0; i<listaEquipos.length; i++){
-        
-        let incluyeId = listaEquiposDisponible.indexOf(listaEquipos[i].Id);
-        console.log(incluyeId);
-        if(incluyeId == -1){
-            listaEquiposDisponible.push(listaEquipos[i].Id);
+    
+    for(let i=1; i<listaEquipos.length; i++){
+       
+        if(listaEquipos[i].Id == listaEquipos[i-1].Id){
+            delete(listaEquipos[i]);
+            delete(listaEquipos[i-1]);
+            
         }
     }
-    console.log(listaEquiposDisponible);
+    
+    console.log(listaEquipos);
     
 </script>
