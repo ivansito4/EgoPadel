@@ -30,8 +30,8 @@ builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 //Login con facebook
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
-    options.AppId = "555244663405805";
-    options.AppSecret = "40c14af9957bcf1f00966d2cdb16a30f";
+    options.AppId = "240393538631557";
+    options.AppSecret = "e5259dad14f48ab13c7ad447cf501522";
 });
 
 //Para tener sesiones

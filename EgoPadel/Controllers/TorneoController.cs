@@ -4,6 +4,7 @@ using EgoPadel.Models.ViewModels;
 using EgoPadel.Utilidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace EgoPadel.Controllers
 {
@@ -40,12 +41,12 @@ namespace EgoPadel.Controllers
         public IActionResult DetallePost(int Id)
         {
             //Si entra aquí se registra el usuario en el torneo
-            string nombreUsuario = User.Identity.Name;
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             ParticipantesIndividual participantesIndividual = new ParticipantesIndividual()
             {
                 TorneoId = Id,
-                UsuarioId = nombreUsuario
+                UsuarioId = userId
             };
 
             _db.ParticipantesIndividual.Add(participantesIndividual);
