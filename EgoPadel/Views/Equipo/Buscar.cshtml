@@ -25,24 +25,34 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="tbody">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FotoEscudo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Puntos)
-            </td>
+    
+        
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+        }
+        
     </tbody>
 </table>
+<script>
+    let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas))
+    let listaEquipos = JSON.parse(equipos);
+    
+    let listaEquiposDisponible = [];
+
+    for(let i=0; i<listaEquipos.length; i++){
+        
+        let incluyeId = listaEquiposDisponible.indexOf(listaEquipos[i].Id);
+        console.log(incluyeId);
+        if(incluyeId == -1){
+            listaEquiposDisponible.push(listaEquipos[i].Id);
+        }
+    }
+    console.log(listaEquiposDisponible);
+    
+</script>
