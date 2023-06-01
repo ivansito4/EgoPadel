@@ -2,7 +2,9 @@ using EgoPadel.Datos;
 using EgoPadel.Infrastructura;
 using EgoPadel.Models;
 using EgoPadel.Servicios;
+using EgoPadel.Utilidades;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +28,8 @@ builder.Services.AddIdentityCore<UsuarioApp>().AddRoles<IdentityRole>()
 
 builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 
+//Para enviar correos
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 //Login con facebook
 builder.Services.AddAuthentication().AddFacebook(options =>

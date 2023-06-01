@@ -7,8 +7,7 @@
     ViewData["Title"] = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (User.IsInRole(WC.AdminRol) | User.IsInRole(WC.UsuarioRol))
-{
+
 <form method="post">
 
     <div class="container backgroundWhite pt-4" >
@@ -73,12 +72,5 @@
         </div>
     </div>
 </form>
-}
-else{
-    <div class="contenedorNoInicioSesion">
-        <img src="~/images/inicio.png" id="imagenSesion">
-        <h1 class="texto">Para realizar una reserva es necesario iniciar sesión</h1>
-        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Login" class="link">Iniciar Sesión</a></button>
-        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Register" class="link">Registarse</a></button>
-    </div>
-}
+
+

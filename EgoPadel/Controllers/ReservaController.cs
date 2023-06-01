@@ -11,9 +11,11 @@ using NuGet.Protocol;
 using System.Diagnostics;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EgoPadel.Controllers
 {
+    [Authorize]
     public class ReservaController : Controller
     {
         private readonly ApplicationDbContext _db;

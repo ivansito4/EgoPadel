@@ -5,6 +5,7 @@ using EgoPadel.Utilidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EgoPadel.Controllers
 {
@@ -25,6 +26,7 @@ namespace EgoPadel.Controllers
             return View(torneovm);
         }
 
+        [Authorize]
         public IActionResult Detalle(int Id)
         {
             

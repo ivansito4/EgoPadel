@@ -1,14 +1,13 @@
 ﻿@model List<Producto>
 @using EgoPadel.Utilidades
 
-@if (User.IsInRole(WC.AdminRol) | User.IsInRole(WC.UsuarioRol))
-{
+
 
     @if (Model.Count() > 0)
     {
         <form method="post">
             <br />
-            <div class="backgroundWhiteBorder">
+            <div >
                 <div class="container row">
                     <div class="col -8">
                         <div style="background-color:white; width:1000px; margin-left:19%; border-radius:1%">
@@ -62,12 +61,12 @@
                                         </div>
 
                                         <div class="col-3 col-lg-2 text-black text-center" style="font-size:20px;padding-top:35px;">
-                                            <span> $@Model[i].Precio</span>
+                                        <span> @Model[i].Precio.ToString("c") </span>
 
                                         </div>
 
                                         <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
-                                            <a asp-action="Remover" asp-route-Id="@Model[i].Id" class="btn btn-outline-danger">
+                                            <a asp-action="Quitar" asp-route-Id="@Model[i].Id" class="btn btn-outline-danger">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </div>
@@ -110,15 +109,6 @@
         <p>Carrito Vacío</p>
     }
 
-}
-else
-{
-    <div class="contenedorNoInicioSesion">
-        <img src="~/images/inicio.png" id="imagenSesion">
-        <h1 class="texto">Para realizar una reserva es necesario iniciar sesión</h1>
-        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Login" class="link">Iniciar Sesión</a></button>
-        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Register" class="link">Registarse</a></button>
-    </div>
-}
+
 
 
