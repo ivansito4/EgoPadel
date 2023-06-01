@@ -31,20 +31,46 @@
     </tbody>
 </table>
 <script>
-    let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas))
-    let listaEquipos = JSON.parse(equipos);
+    function insertarEquipos(){
+        let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas))
+        let listaEquipos = JSON.parse(equipos);
     
-    let listaEquiposDisponible = [];
-    
-    for(let i=1; i<listaEquipos.length; i++){
+        for(let i=1; i<listaEquipos.length; i++){
        
-        if(listaEquipos[i].Id == listaEquipos[i-1].Id){
-            delete(listaEquipos[i]);
-            delete(listaEquipos[i-1]);
-            
+            if(listaEquipos[i].Id == listaEquipos[i-1].Id){
+                delete(listaEquipos[i]);
+                delete(listaEquipos[i-1]);
+            }
         }
+   
+        listaEquipos.forEach(function (equipo){
+             let tbody=document.getElementById("tbody");
+             
+             let row=document.createElement("tr");
+             tbody.appendChild(row);
+
+             let colNombre=document.createElement("td");
+             colNombre.innerHTML=equipo.Nombre
+             row.appendChild(colNombre);
+
+             let colFoto=document.createElement("td");
+             let foto = document.createElement("img");
+             foto.src='/images/Equipos/' + equipo.FotoEscudo;
+             foto.width=50;
+             colFoto.appendChild(foto);
+             row.appendChild(colFoto);
+
+             let colPuntos=document.createElement("td");
+             colPuntos.innerHTML=equipo.Puntos
+             row.appendChild(colPuntos);
+
+             let colBoton=document.createElement("td");
+             let botonUnirse=document.createElement("button");
+             botonUnirse.innerHTML="UNIRSE";
+             colBoton.appendChild(botonUnirse);
+             row.appendChild(colBoton);
+        })
+
     }
-    
-    console.log(listaEquipos);
-    
+    window.onload = insertarEquipos();
 </script>
