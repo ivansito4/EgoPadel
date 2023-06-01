@@ -38,20 +38,50 @@ namespace EgoPadel.Controllers
         }
 
         [HttpPost, ActionName("Detalle")]
-        public IActionResult DetallePost(int Id)
+        public IActionResult InscribirTorneo(int Id)
         {
+            //Busco de que modalidad es el torneo
+            string modalidadTorneo = _db.Torneo.Where(p => p.Id == Id).FirstOrDefault().Modalidad;
+
+
             //Si entra aquí se registra el usuario en el torneo
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            ParticipantesIndividual participantesIndividual = new ParticipantesIndividual()
+            if (modalidadTorneo == "Individual")
             {
-                TorneoId = Id,
-                UsuarioId = userId
-            };
+                
+                ParticipantesIndividual participantesIndividual = new ParticipantesIndividual()
+                {
+                    TorneoId = Id,
+                    UsuarioId = userId
+                };
 
-            _db.ParticipantesIndividual.Add(participantesIndividual);
-            _db.SaveChanges();
+                _db.ParticipantesIndividual.Add(participantesIndividual);
 
+                _db.SaveChanges();
+                TempData[WC.Exitoso] = "Te has apuntado correctamente";
+            }
+            else
+            {
+                UsuarioApp Usuario = (UsuarioApp)_db.Users.Where(f => f.Id == userId).FirstOrDefault();
+                if (Usuario.EquipoId == null || Usuario.EquipoId == 0)
+                {   //No tiene equipo
+                    TempData[WC.Error] = "Necesitas un equipo para poder registrarte";
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //Tiene equipo y se inscribe
+                    ParticipantesEquipo participantesEquipo = new ParticipantesEquipo()
+                    {
+                        TorneoId = Id,
+                        EquipoId = (int)Usuario.EquipoId
+                    };
+                    _db.ParticipantesEquipos.Add(participantesEquipo);
+                    _db.SaveChanges();
+                    TempData[WC.Exitoso] = "Equipo apuntado correctamente";
+                }
+            }
             return RedirectToAction(nameof(Index));
         }
 
@@ -69,8 +99,10 @@ namespace EgoPadel.Controllers
             {
                 _db.Torneo.Add(torneo);
                 _db.SaveChanges();
-				return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+                TempData[WC.Exitoso] = "Torneo creado correctamente";
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
 			}
+            TempData[WC.Error] = "Error al crear el torneo";
             return View(torneo);
             
         }
@@ -97,9 +129,11 @@ namespace EgoPadel.Controllers
 			{
 				_db.Torneo.Update(torneo);
 				_db.SaveChanges();
-				return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+                TempData[WC.Exitoso] = "Torneo editado correctamente";
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
 			}
-			return View(torneo);
+            TempData[WC.Error] = "Error al editar el torneo";
+            return View(torneo);
 		}
 
 		//Get
@@ -122,11 +156,13 @@ namespace EgoPadel.Controllers
 		{
 			if (torneo == null)
 			{
-				return NotFound();
+                TempData[WC.Error] = "Error al borrar el torneo";
+                return NotFound();
 			}
 			_db.Torneo.Remove(torneo);
 			_db.SaveChanges();
-			return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+            TempData[WC.Exitoso] = "Torneo borrado correctamente";
+            return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
 		}
 	}
 }

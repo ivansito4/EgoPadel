@@ -7,19 +7,32 @@
 
 <h1>Index</h1>
 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Torneo)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipo)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Torneo.Id)
+                    @Html.DisplayFor(modelItem => item.Torneo.Tipo)  @Html.DisplayFor(modelItem => item.Torneo.Modalidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Equipo.Nombre)
+            </td>
+            <td>
+                <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
             </td>
         </tr>
 }

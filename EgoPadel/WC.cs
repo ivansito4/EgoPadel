@@ -11,5 +11,9 @@ namespace EgoPadel
         public static string AdminRol = "Admin";
         public static string UsuarioRol = "Usuario";
         public static string FotoEscudo = @"\images\Equipos\";
+
+        //Mensajes
+        public const string Exitoso = "Exitoso";
+        public const string Error = "Error";
     }
 }

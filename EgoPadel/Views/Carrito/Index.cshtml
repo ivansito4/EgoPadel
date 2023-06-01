@@ -1,0 +1,124 @@
+﻿@model List<Producto>
+@using EgoPadel.Utilidades
+
+@if (User.IsInRole(WC.AdminRol) | User.IsInRole(WC.UsuarioRol))
+{
+
+    @if (Model.Count() > 0)
+    {
+        <form method="post">
+            <br />
+            <div class="backgroundWhiteBorder">
+                <div class="container row">
+                    <div class="col -8">
+                        <div style="background-color:white; width:1000px; margin-left:19%; border-radius:1%">
+                            <div class="card-header bg-dark text-light ml-0 p-3 row container">
+                                <div class="col-6">
+                                    <i class="fa fa-shopping-cart"></i> &nbsp;
+                                    Mi carrito
+                                </div>
+                                <div class="col-6 text-end">
+                                    <a asp-action="Limpiar" asp-controller="Carro" class="btn btn-outline-warning btn-sm">Limpiar carrito</a>
+                                    <a asp-action="Index" asp-controller="Producto" class="btn btn-outline-info btn-sm">Continuar Comprando</a>
+                                </div>
+                            </div>
+                            <div class="card-body" style="text-align:center;">
+                                <div class=" d-none d-lg-block">
+                                    <div class="row" style="color:#821f3d">
+
+                                        <div class="col-lg-2" >
+                                        </div>
+                                            <div class="col-12 col-lg-3">
+                                                Nombre
+                                            </div>
+                                        <div class="col-12 col-lg-4">
+                                            Descripción
+                                        </div>
+
+                                        <div class="col-12 col-lg-2">
+                                            Precio 
+                                        </div>
+
+                                            
+                                    </div>
+                                </div>
+
+                                <hr />
+                                @{
+                                    var totalorden = 0.0;
+                                }
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    <input hidden asp-for="@Model[i].Id" />
+                                    <div class="row h-100">
+                                        <div class="col-5 col-md-2 text-center py-2">
+                                            <img src="~/fotosProductos/@Model[i].Foto" class="rounded" width="100px"/>
+                                        </div>
+                                        <div class="col-12 col-lg-3 text-black pt-5 text-center">
+                                                <h5>@Model[i].Nombre</h5>
+                                            </div>
+                                        <div class="col-12 col-lg-4 text-black text-center" style="padding-top:45px;">
+                                            <div >@Model[i].Descripcion</div>
+                                        </div>
+
+                                        <div class="col-3 col-lg-2 text-black text-center" style="font-size:20px;padding-top:35px;">
+                                            <span> $@Model[i].Precio</span>
+
+                                        </div>
+
+                                        <div class="col-2 col-lg-1 p-0 pt-lg-4 text-center">
+                                            <a asp-action="Remover" asp-route-Id="@Model[i].Id" class="btn btn-outline-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    totalorden += Model[i].Precio;
+                                }
+
+                                <div class="col-12 text-end pr-4" style="color:#821f3d;padding-right:50px" >
+                                    Precio Total: @string.Format("{0:c}",totalorden)
+                                </div>
+
+                                <hr />
+                            </div>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-6 col-md-3 offset-md-6">
+                                        @if (User.IsInRole(WC.AdminRol))
+                                        {
+                                            <button type="submit" asp-action="ActualizarCarro"
+                                            class="btn btn-info form-control" formmethod="post">
+                                                <span>Actualizar Carro</span>
+                                            </button>
+                                        }
+                                    </div>
+                                    <div class="col-6 col-md-3">
+                                        <button type="submit" class="btn btn-success form-control ">
+                                            <span>Continuar</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Carrito Vacío</p>
+    }
+
+}
+else
+{
+    <div class="contenedorNoInicioSesion">
+        <img src="~/images/inicio.png" id="imagenSesion">
+        <h1 class="texto">Para realizar una reserva es necesario iniciar sesión</h1>
+        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Login" class="link">Iniciar Sesión</a></button>
+        <button class="btn-primary boton"><a asp-area="Identity" asp-page="/Account/Register" class="link">Registarse</a></button>
+    </div>
+}
+
+
