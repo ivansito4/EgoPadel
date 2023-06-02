@@ -1,12 +1,14 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Infrastructura;
 using EgoPadel.Models;
+using EgoPadel.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NuGet.Protocol;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 
 namespace EgoPadel.Controllers
@@ -43,11 +45,18 @@ namespace EgoPadel.Controllers
                                select equipo).ToJson();
 
             //"SELECT e.Id FROM Equipo AS e INNER JOIN AspNetUsers AS a ON e.Id = a.EquipoId GROUP BY e.Id HAVING(COUNT(e.Id) < 2)"
-
-
-
-
             return View(await equipos.AsNoTracking().ToListAsync());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Unirse(UsuarioApp user, int? unirse)
+        {
+                int idEquipo = unirse;
+                user.EquipoId = idEquipo;
+                _db.UsuarioApp.Update(user);
+                _db.SaveChanges();
+                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
 
         //Get

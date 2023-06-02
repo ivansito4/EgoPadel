@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore;
+using EgoPadel.Models.ViewModels;
 
 namespace EgoPadel.Datos
 {
@@ -23,5 +24,7 @@ namespace EgoPadel.Datos
         public DbSet<Pedido> Pedido { get; set; }   
 
         public DbSet<PedidoDetalle> PedidoDetalles { get; set; }
+
+        public DbSet<EgoPadel.Models.ViewModels.BuscarVM>? BuscarVM { get; set; }
     }
 }
