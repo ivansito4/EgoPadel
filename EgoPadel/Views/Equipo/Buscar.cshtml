@@ -10,7 +10,6 @@
 
 </head>
 <h1> Buscar </h1>
-
 <p >
     <a asp-action = "Create" > Create New </a>
 </p >
@@ -30,10 +29,9 @@
         </tr >
     </thead >
     <tbody id = "tbody" >
-        <form asp-action="Unirse" asp-controller="Equipo">
             <input type="hidden" name="unirse" id="valor"/>
-            <button type="submit" class= "btn btn-primary" id="unirseBoton" >UNIRSE</button>
-        </form>
+        <a asp-action="Unirse" class="btn btn-primary" id="unirseBoton">UNIRSE</a>
+        
     </tbody>
 </table>
 <script>
@@ -83,7 +81,7 @@
     })
 
     }
-    console.log(@ViewBag.idEquipo);
+    
 window.onload = insertarEquipos();
 </script>
 
