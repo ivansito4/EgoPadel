@@ -47,18 +47,16 @@ namespace EgoPadel.Controllers
             return View(await equipos.AsNoTracking().ToListAsync());
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Unirse()
+        public IActionResult Unirse(int Id)
         {
-            int idEquipo = 5;
+            int idEquipo = Id;
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
             user.EquipoId = idEquipo;
             _db.UsuarioApp.Update(user);
             _db.SaveChanges();
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
         //Get
         public IActionResult Crear()
