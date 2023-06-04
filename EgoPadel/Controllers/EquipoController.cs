@@ -122,6 +122,35 @@ namespace EgoPadel.Controllers
             {
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
+
+                var objEquipo = _db.Equipo.AsNoTracking().FirstOrDefault(e=>e.Id == equipo.Id);
+
+                if (files.Count > 0)
+                {
+                    string upload = webRootPath + WC.FotoEscudo;
+                    string fileName = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    //borrar la imagen anterior
+                    var anteriorFile = Path.Combine(upload, objEquipo.FotoEscudo);
+                    if( System.IO.File.Exists(anteriorFile))
+                    {
+                        System.IO.File.Delete(anteriorFile);
+                    }
+                    //fin borrar imagen anterior
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    equipo.FotoEscudo = fileName + extension;
+                }
+                else
+                {
+                    equipo.FotoEscudo = objEquipo.FotoEscudo;
+                }
+
                 _db.Equipo.Update(equipo);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
@@ -147,13 +176,28 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Borrar(Equipo equipo)
         {
+            
             if (equipo == null)
             {
                 return NotFound();
             }
+            var usuarios = _db.UsuarioApp.Where(u => u.EquipoId == equipo.Id);
+            foreach(UsuarioApp u in usuarios) {
+                u.EquipoId = null;
+            }
+
             _db.Equipo.Remove(equipo);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
+        public IActionResult Detalle(int Id)
+        {
+            Equipo equipo = _db.Equipo.Where(e => e.Id == Id).FirstOrDefault();
+             
+
+            return View(equipo);
+        }
     }
 }
+
+
