@@ -10,7 +10,7 @@ namespace EgoPadel.Utilidades
 
         public EmailSender(IConfiguration _config)
         {
-            SendGridSecret = _config.GetValue<string>("SendGrid.SecretKey");
+            SendGridSecret = _config.GetValue<string>("SendGrid:SecretKey");
         }
 
         public Task SendEmailAsync(string email, string subject, string htmlMessage)

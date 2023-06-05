@@ -1,0 +1,16 @@
+﻿@model EgoPadel.Models.Pedido
+
+
+<div class="text-center">
+	@if (Model != null)
+	{
+		<h1 class="text-info">Venta Creada</h1>
+		<p>Venta @Model.Id Creada Correctamente</p>
+	}
+	else
+	{
+		<h1 class="text-info">Confirmación</h1>
+		<p>Hemos recibido tu consulta. Un miembro de nuestro equipo se pondrá en contacto contigo</p>
+	}
+	<img src="/imagenes/patio.jpg" width="80%" />
+</div>
