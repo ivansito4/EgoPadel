@@ -201,8 +201,7 @@ namespace EgoPadel.Controllers
             _db.UsuarioApp.Update(user);
             _db.SaveChanges();
             var equipos = from equipo in _db.Equipo
-                          join us in _db.UsuarioApp
-                          on equipo.Id equals us.EquipoId
+                          from user in _db.UsuarioApp.Where( user => user.EquipoId != equipo.Id)
                           select equipo;
             ViewBag.Equipo(equipos);
             return RedirectToAction(nameof(Index));
