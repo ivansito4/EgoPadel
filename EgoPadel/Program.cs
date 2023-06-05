@@ -3,6 +3,7 @@ using EgoPadel.Infrastructura;
 using EgoPadel.Models;
 using EgoPadel.Servicios;
 using EgoPadel.Utilidades;
+using EgoPadel.Utilidades.BrainTree;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,11 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>()
                               .AddDefaultTokenProviders().AddDefaultUI()
                               .AddEntityFrameworkStores<ApplicationDbContext>();
 
+//Lo del braintree
+builder.Services.Configure<BrainTreeSetings>(builder.Configuration.GetSection("BrainTree"));
+builder.Services.AddSingleton<IBrainTreeGate, BrainTreeGate>();
+
+
 builder.Services.AddIdentityCore<UsuarioApp>().AddRoles<IdentityRole>()
     .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<UsuarioApp, IdentityRole>>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -31,11 +37,12 @@ builder.Services.AddTransient<IUnitOfWork,UnitOfWork>();
 //Para enviar correos
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+
 //Login con facebook
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
-    options.AppId = "240393538631557";
-    options.AppSecret = "e5259dad14f48ab13c7ad447cf501522";
+    options.AppId = "a96NelCSRYe3roHTneHa-w";
+    options.AppSecret = "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";
 });
 
 //Para tener sesiones

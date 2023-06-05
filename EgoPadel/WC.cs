@@ -15,5 +15,13 @@ namespace EgoPadel
         //Mensajes
         public const string Exitoso = "Exitoso";
         public const string Error = "Error";
+
+        //Estados de Pedido
+        public const string EstadoPendiente = "Pendiente";
+        public const string EstadoAprobado = "Aprobado";
+        public const string EstadoEnProceso = "Procesando";
+        public const string EstadoEnviado = "Enviado";
+        public const string EstadoCancelado = "Cancelado";
+        public const string EstadoDevuelto = "Devuelto";
     }
 }

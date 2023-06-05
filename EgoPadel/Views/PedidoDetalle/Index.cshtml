@@ -31,8 +31,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Producto.Nombre)
             </td>
-            <td>
-                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+            <td>@*
+                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |*@
                 <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
             </td>
         </tr>

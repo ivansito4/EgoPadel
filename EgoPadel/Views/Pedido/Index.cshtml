@@ -7,6 +7,9 @@
 
 <h1>Index</h1>
 
+<p>
+    <a asp-action="Crear">Crear nueva</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -20,10 +23,19 @@
                 @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NombreCompleto)
+                @Html.DisplayNameFor(model => model.Login)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransaccionId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstadoVenta)
             </th>
             <th></th>
         </tr>
@@ -41,15 +53,24 @@
                 @Html.DisplayFor(modelItem => item.Telefono)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NombreCompleto)
+                @Html.DisplayFor(modelItem => item.Login)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @Html.DisplayFor(modelItem => item.PrecioTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransaccionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstadoVenta)
+            </td>
+            <td>
+                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
             </td>
         </tr>
 }

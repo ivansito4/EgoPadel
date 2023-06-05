@@ -21,9 +21,16 @@ namespace EgoPadel.Models
         public string Telefono { get; set; }
 
         [Required]
-        public string NombreCompleto { get; set; }
+        public string Login { get; set; }
 
         [Required]
         public string Email { get; set; }
+
+        [Required]
+        public double PrecioTotal { get; set; }
+
+        public string? TransaccionId { get; set; }  // BrainTree 
+
+        public string EstadoVenta { get; set; }
     }
 }
