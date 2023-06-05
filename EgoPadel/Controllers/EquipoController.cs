@@ -39,10 +39,15 @@ namespace EgoPadel.Controllers
                            join user in _db.UsuarioApp
                            on equipo.Id equals user.EquipoId
                            select equipo;
-            ViewBag.Reservas = (from equipo in _db.Equipo
-                               join user in _db.UsuarioApp
-                               on equipo.Id equals user.EquipoId
-                               select equipo).ToJson();
+            ViewBag.Reservas = (from usuario in _db.UsuarioApp
+                                join equipo in _db.Equipo
+                                on usuario.EquipoId equals equipo.Id
+                               select new UsuarioApp{
+                                EquipoId = usuario.EquipoId,
+                                Foto = equipo.FotoEscudo,
+                               Nombre = equipo.Nombre,
+                               Puntos = equipo.Puntos
+                                }).OrderByDescending(e=>e.EquipoId).ToJson();
 
             return View(await equipos.AsNoTracking().ToListAsync());
         }
@@ -192,8 +197,21 @@ namespace EgoPadel.Controllers
         }
         public IActionResult Detalle(int Id)
         {
+
             Equipo equipo = _db.Equipo.Where(e => e.Id == Id).FirstOrDefault();
-             
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
+
+            if(Id == user.EquipoId)
+            {
+                ViewBag.Equipo = true;
+            }
+            else
+            {
+                ViewBag.Equipo = false;
+            }
+            
 
             return View(equipo);
         }

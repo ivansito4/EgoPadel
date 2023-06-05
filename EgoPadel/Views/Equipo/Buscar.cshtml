@@ -30,24 +30,24 @@
     </thead >
     <tbody id = "tbody" >
             <input type="hidden" name="unirse" id="valor"/>
-        <a asp-action="Unirse" asp-route-Id="4" class="btn btn-primary">Unirse</a>
+            <a asp-action="Unirse" asp-route-Id= class="btn btn-primary" id="unirseBoton">Unirse</a>
         
     </tbody>
 </table>
 <script>
     function insertarEquipos() {
-    let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas))
-            let listaEquipos = JSON.parse(equipos);
+        let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas));
+        let listaEquipos = JSON.parse(equipos);
+            console.log(listaEquipos);
+    //for (let i = 0; i < listaEquipos.length; i++)
+    //{
 
-    for (let i = 1; i < listaEquipos.length; i++)
-    {
-
-        if (listaEquipos[i].Id == listaEquipos[i - 1].Id)
-        {
-            delete(listaEquipos[i]);
-            delete(listaEquipos[i - 1]);
-        }
-    }
+    //        if (i != 0 && listaEquipos[i].EquipoId == listaEquipos[i - 1].EquipoId) {
+    //        delete(listaEquipos[i]);
+    //        delete(listaEquipos[i - 1]);
+    //    }
+    //}
+    console.log(listaEquipos)
 
     listaEquipos.forEach(function(equipo) {
         let tbody = document.getElementById("tbody");
@@ -61,7 +61,7 @@
 
         let colFoto = document.createElement("td");
         let foto = document.createElement("img");
-        foto.src = '/images/Equipos/' + equipo.FotoEscudo;
+        foto.src = '/images/Equipos/' + equipo.Foto;
         foto.width = 50;
         colFoto.appendChild(foto);
         row.appendChild(colFoto);
@@ -74,6 +74,7 @@
 
         let boton = document.getElementById('unirseBoton');
         colBoton.appendChild(boton);
+        colBoton.value = equipo.Id;
         row.appendChild(colBoton);
 
         let valorId=document.getElementById("valor");
