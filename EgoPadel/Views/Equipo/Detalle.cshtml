@@ -1,0 +1,43 @@
+﻿@model EgoPadel.Models.Equipo
+
+@{
+    ViewData["Title"] = "Detalle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Detalle</h1>
+
+<div>
+    <h4>Equipo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FotoEscudo)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="~/images/Equipos/@Html.DisplayFor(model => model.FotoEscudo)" width="50px"/>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Puntos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Puntos)
+        </dd>
+        <p>@ViewBag.Equipo</p>
+    </dl>
+</div>
+<div>
+    @if (ViewBag.Equipo == true || User.IsInRole(WC.AdminRol))
+    {
+        <a asp-action="Editar" asp-route-id="@Model?.Id">Editar</a>
+        <a asp-action="Borrar" asp-route-id="@Model?.Id">Borrar</a>
+    }
+    
+    <a asp-action="Index">Back to List</a>
+</div>

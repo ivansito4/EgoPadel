@@ -39,10 +39,15 @@ namespace EgoPadel.Controllers
                            join user in _db.UsuarioApp
                            on equipo.Id equals user.EquipoId
                            select equipo;
-            ViewBag.Reservas = (from equipo in _db.Equipo
-                               join user in _db.UsuarioApp
-                               on equipo.Id equals user.EquipoId
-                               select equipo).ToJson();
+            ViewBag.Reservas = (from usuario in _db.UsuarioApp
+                                join equipo in _db.Equipo
+                                on usuario.EquipoId equals equipo.Id
+                               select new UsuarioApp{
+                                EquipoId = usuario.EquipoId,
+                                Foto = equipo.FotoEscudo,
+                               Nombre = equipo.Nombre,
+                               Puntos = equipo.Puntos
+                                }).OrderByDescending(e=>e.EquipoId).ToJson();
 
             return View(await equipos.AsNoTracking().ToListAsync());
         }
@@ -122,6 +127,35 @@ namespace EgoPadel.Controllers
             {
                 var files = HttpContext.Request.Form.Files;
                 string webRootPath = _webHostEnvironment.WebRootPath;
+
+                var objEquipo = _db.Equipo.AsNoTracking().FirstOrDefault(e=>e.Id == equipo.Id);
+
+                if (files.Count > 0)
+                {
+                    string upload = webRootPath + WC.FotoEscudo;
+                    string fileName = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    //borrar la imagen anterior
+                    var anteriorFile = Path.Combine(upload, objEquipo.FotoEscudo);
+                    if( System.IO.File.Exists(anteriorFile))
+                    {
+                        System.IO.File.Delete(anteriorFile);
+                    }
+                    //fin borrar imagen anterior
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    equipo.FotoEscudo = fileName + extension;
+                }
+                else
+                {
+                    equipo.FotoEscudo = objEquipo.FotoEscudo;
+                }
+
                 _db.Equipo.Update(equipo);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
@@ -147,13 +181,41 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Borrar(Equipo equipo)
         {
+            
             if (equipo == null)
             {
                 return NotFound();
             }
+            var usuarios = _db.UsuarioApp.Where(u => u.EquipoId == equipo.Id);
+            foreach(UsuarioApp u in usuarios) {
+                u.EquipoId = null;
+            }
+
             _db.Equipo.Remove(equipo);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
+        public IActionResult Detalle(int Id)
+        {
+
+            Equipo equipo = _db.Equipo.Where(e => e.Id == Id).FirstOrDefault();
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
+
+            if(Id == user.EquipoId)
+            {
+                ViewBag.Equipo = true;
+            }
+            else
+            {
+                ViewBag.Equipo = false;
+            }
+            
+
+            return View(equipo);
+        }
     }
 }
+
+
