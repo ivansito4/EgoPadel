@@ -29,24 +29,25 @@
         </tr >
     </thead >
     <tbody id = "tbody" >
-            <input type="hidden" name="unirse" id="valor"/>
-            <a asp-action="Unirse" asp-route-Id= class="btn btn-primary" id="unirseBoton">Unirse</a>
         
     </tbody>
 </table>
 <script>
+    let equipo = @Html.Raw(Json.Serialize(ViewBag.Equipo));
+    let listaEquipo = JSON.parse(equipoo);
     function insertarEquipos() {
         let equipos = @Html.Raw(Json.Serialize(ViewBag.Reservas));
         let listaEquipos = JSON.parse(equipos);
             console.log(listaEquipos);
-    //for (let i = 0; i < listaEquipos.length; i++)
-    //{
+       
+    for (let i = 0; i < listaEquipos.length; i++)
+    {
 
-    //        if (i != 0 && listaEquipos[i].EquipoId == listaEquipos[i - 1].EquipoId) {
-    //        delete(listaEquipos[i]);
-    //        delete(listaEquipos[i - 1]);
-    //    }
-    //}
+            if (i != 0 && listaEquipos[i].EquipoId == listaEquipos[i - 1].EquipoId) {
+            delete(listaEquipos[i]);
+            delete(listaEquipos[i - 1]);
+        }
+    }
     console.log(listaEquipos)
 
     listaEquipos.forEach(function(equipo) {
@@ -68,17 +69,19 @@
 
         let colPuntos = document.createElement("td");
         colPuntos.innerHTML = equipo.Puntos
-            row.appendChild(colPuntos);
+        row.appendChild(colPuntos);
 
         let colBoton = document.createElement("td");
 
-        let boton = document.getElementById('unirseBoton');
-        colBoton.appendChild(boton);
-        colBoton.value = equipo.Id;
+        let boton = document.createElement("a");
+        boton.innerHTML = 'Unirse';
+        boton.setAttribute('href' , "/Equipo/Unirse/" + equipo.EquipoId);
+
+            colBoton.appendChild(boton);
+
         row.appendChild(colBoton);
 
-        let valorId=document.getElementById("valor");
-        valorId.value=equipo.Id;
+        
     })
 
     }

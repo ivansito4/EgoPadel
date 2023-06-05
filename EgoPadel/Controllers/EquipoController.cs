@@ -52,17 +52,7 @@ namespace EgoPadel.Controllers
             return View(await equipos.AsNoTracking().ToListAsync());
         }
 
-        public IActionResult Unirse(int Id)
-        {
-            int idEquipo = Id;
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
-            user.EquipoId = idEquipo;
-            _db.UsuarioApp.Update(user);
-            _db.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
+        
         //Get
         public IActionResult Crear()
         {
@@ -73,7 +63,6 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(Equipo equipo)
         {
-
             if (ModelState.IsValid)
             {
                 var files = HttpContext.Request.Form.Files;
@@ -96,8 +85,15 @@ namespace EgoPadel.Controllers
                     }
                     equipo.FotoEscudo = fileName + extension;
                 }
-                
+                equipo.Puntos = 0;
                 _db.Equipo.Add(equipo);
+                _db.SaveChanges();
+                int idEquipo = equipo.Id;
+                var claimsIdentity = (ClaimsIdentity)User.Identity;
+                var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
+                user.EquipoId = idEquipo;
+                _db.UsuarioApp.Update(user);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
@@ -194,6 +190,24 @@ namespace EgoPadel.Controllers
             _db.Equipo.Remove(equipo);
             _db.SaveChanges();
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
+        }
+        public IActionResult Unirse(int Id)
+        {
+            int idEquipo = Id;
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            UsuarioApp user = _db.UsuarioApp.FirstOrDefault(u => u.Id == claim.Value);
+            user.EquipoId = idEquipo;
+            _db.UsuarioApp.Update(user);
+            _db.SaveChanges();
+            var equipos = from equipo in _db.Equipo
+                          join us in _db.UsuarioApp
+                          on equipo.Id equals us.EquipoId
+                          select equipo;
+            ViewBag.Equipo(equipos);
+            return RedirectToAction(nameof(Index));
+
+            
         }
         public IActionResult Detalle(int Id)
         {
