@@ -10,7 +10,11 @@ namespace EgoPadel
         //Los distintos roles
         public static string AdminRol = "Admin";
         public static string UsuarioRol = "Usuario";
+
+        //Rutas imagenes
         public static string FotoEscudo = @"\images\Equipos\";
+        public static string FotoProducto = @"\images\Productos\";
+        
 
         //Mensajes
         public const string Exitoso = "Exitoso";

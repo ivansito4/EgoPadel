@@ -186,22 +186,14 @@ namespace EgoPadel.Controllers
                     productoListaSB.Append($" - Nombre : {prod.Nombre} <span style='font-size:14px;'> (ID: {prod.Id})</span><br/>");
                 }
 
-                // string messageBody = string.Format(HtmlBody, productoUsuarioVM.UsuarioApp.Nombre,
-                //                                             productoUsuarioVM.UsuarioApp.Apellidos,
-                //productoUsuarioVM.UsuarioApp.UserName,
-                //                                             productoUsuarioVM.UsuarioApp.Email,
-                //                                             productoUsuarioVM.UsuarioApp.PhoneNumber,
-                // productoListaSB.ToString());
-
-                string messageBody = "AAAAAAAAAAAA";
-                string correoUsuario = _db.UsuarioApp.FirstOrDefault(p => p.Id == claim.Value).Email;
-
-
-				await _emailSender.SendEmailAsync(correoUsuario, subject, messageBody);
-
-
-
-
+            string messageBody = string.Format(HtmlBody,userActual.Nombre,
+														userActual.Apellidos,
+                                                        userActual.UserName,
+                                                        userActual.Email,
+                                                        userActual.PhoneNumber,
+            productoListaSB.ToString());
+            
+            await _emailSender.SendEmailAsync(userActual.Email, subject, messageBody);
 
             return RedirectToAction(nameof(Confirmacion), new { id = pedido.Id });
         }

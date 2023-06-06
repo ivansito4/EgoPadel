@@ -2,6 +2,7 @@
 using EgoPadel.Models;
 using EgoPadel.Models.ViewModels;
 using EgoPadel.Utilidades;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,10 +11,12 @@ namespace EgoPadel.Controllers
     public class ProductoController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductoController(ApplicationDbContext db)
+        public ProductoController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
-            _db = db;  
+            _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -95,6 +98,26 @@ namespace EgoPadel.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Crear(Producto producto)
         {
+            var files = HttpContext.Request.Form.Files;
+            string webRootPath = _webHostEnvironment.WebRootPath;
+
+            string upload = webRootPath + WC.FotoEscudo;
+
+            if (files.Count() == 0)
+            {
+                producto.Foto = @"default.png";
+            }
+            else
+            {
+                string fileName = Guid.NewGuid().ToString();
+                string extension = Path.GetExtension(files[0].FileName);
+
+                using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(fileStream);
+                }
+                producto.Foto = fileName + extension;
+            }
             if (ModelState.IsValid)
             {
                 _db.Producto.Add(producto);
@@ -125,6 +148,37 @@ namespace EgoPadel.Controllers
         {
             if (ModelState.IsValid)
             {
+                var files = HttpContext.Request.Form.Files;
+                string webRootPath = _webHostEnvironment.WebRootPath;
+
+                var objProd = _db.Producto.AsNoTracking().FirstOrDefault(e => e.Id == producto.Id);
+
+                if (files.Count > 0)
+                {
+                    string upload = webRootPath + WC.FotoProducto;
+                    string fileName = Guid.NewGuid().ToString();
+                    string extension = Path.GetExtension(files[0].FileName);
+
+                    //borrar la imagen anterior
+                    var anteriorFile = Path.Combine(upload, objProd.Foto);
+                    if (System.IO.File.Exists(anteriorFile))
+                    {
+                        System.IO.File.Delete(anteriorFile);
+                    }
+                    //fin borrar imagen anterior
+
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+                    }
+
+                    producto.Foto = fileName + extension;
+                }
+                else
+                {
+                    producto.Foto = objProd.Foto;
+                }
+
                 _db.Producto.Update(producto);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
