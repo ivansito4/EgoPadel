@@ -9,27 +9,26 @@
 </head>
 <h1>Clasificación Individual</h1>
 
-<table class="table">
-    <thead>
+<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px; ">
+    <thead class="text-center">
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Nombre)</a>
+                @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Apellidos)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.Puntos)</a>
+                @Html.DisplayNameFor(model => model.Puntos)
             </th>
-            <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class ="text-center">
         @foreach (var item in Model)
         {
             @if (ViewBag.userId == item.Id)
             {
-            <tr style="background-color:grey;">
+                <tr class="bg-success text-light">
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -49,7 +48,7 @@
             </tr>
             }else{
                 <tr>
-                    <td>
+                    <td >
                         @Html.DisplayFor(modelItem => item.Nombre)
                     </td>
                     <td>

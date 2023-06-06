@@ -200,13 +200,6 @@ namespace EgoPadel.Controllers
             user.EquipoId = idEquipo;
             _db.UsuarioApp.Update(user);
             _db.SaveChanges();
-            var equipos = from equipo in _db.Equipo
-                          from usuario in _db.UsuarioApp.Where( user => user.EquipoId != equipo.Id)
-                          select equipo;
-            foreach(Equipo eq in equipos)
-            {
-                Borrar(eq);
-            }
             return RedirectToAction(nameof(Index));
 
             

@@ -14,15 +14,11 @@
 
 </head>
 <h1>Clasificación Por Equipos</h1>
-
-<p>
-    <a asp-action="Crear">Crear Nuevo</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px; ">
+    <thead class="text-center">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FotoEscudo)
+                Escudo
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -30,10 +26,10 @@
             <th>
                @Html.DisplayNameFor(model => model.Puntos)
             </th>
-            <th></th>
+            <th>Información</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
         @foreach (var item in Model)
         {
             <tr>
@@ -46,8 +42,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Puntos)
                 </td>
-                    <td>
-                        <a asp-action="Detalle" asp-route-id="@item.Id">Detalle</a> |
+                    <td class="text-center">
+
+                    <a class="w-50 btn btn-lg btn-success form-control" asp-action="Detalle" asp-route-id="@item.Id">Detalles</a> 
                     
                 </td>
                 
