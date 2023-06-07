@@ -19,7 +19,7 @@ body {
     overflow-x: hidden;
     background-image: url("../images/fondoPag.jpg");
     background-repeat: no-repeat;
-    
+    background-attachment: fixed;
 }
 
 .footer {
@@ -33,9 +33,6 @@ body {
     color: white;
     margin: 0;
     padding: 0;
-    position: relative;
-    bottom: 16px;
-    right: 10px;
 }
 
 #logo {

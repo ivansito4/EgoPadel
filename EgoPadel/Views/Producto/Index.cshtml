@@ -18,19 +18,13 @@
     </p>
 }
 
-    <div class="text-center">
-        <button class="btn btn-dark filter-button" data-filter="all">Todos</button>
-        
-        <button class="btn btn-outline-secondary filter-button" data-filter="Pala">Palas</button>
-        <button class="btn btn-outline-secondary filter-button" data-filter="Pelota">Pelotas</button>
-        <button class="btn btn-outline-secondary filter-button" data-filter="Ropa">Ropa</button>
-    </div>
+
 
     <div class=" contenedor-cartas">
         @foreach (var item in Model.Producto)
         {
             <div class="card-tienda filter @item.Nombre.Replace(' ','_')">
-                <img class="imagen-prod" src="@WC.FotoProducto/@item.Foto" >
+                <img class="imagen-prod"  src="@WC.FotoProducto/@item.Foto" >
                 <h4 class="titulo text-dark">@item.Nombre</h4>
                 <span class="price text-dark"> @((item.Precio).ToString("c"))</span>
                 <div class="col-12 p-1">
@@ -40,33 +34,8 @@
             
         }
     </div>
-    <div>
-        Página 1 de 1
-    </div>
 </div>
 
 
-@section Scripts{
-    <script>
-        $(document).ready(function () {
-
-            $(".filter-button").click(function () {
-
-                var value = $(this).attr('data-filter');
-                if (value == "all") {
-                    $('.filter').show('1000');
-                }
-                else {
-                    var texto="^."+value;
-                    $(".filter").hide();
-                    
-                    $(".filter").some(texto).show('3000'); 
-
-                }
-            });
-
-        });
-    </script>
-}
 
 

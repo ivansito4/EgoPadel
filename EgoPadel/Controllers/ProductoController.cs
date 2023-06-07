@@ -101,7 +101,7 @@ namespace EgoPadel.Controllers
             var files = HttpContext.Request.Form.Files;
             string webRootPath = _webHostEnvironment.WebRootPath;
 
-            string upload = webRootPath + WC.FotoEscudo;
+            string upload = webRootPath + WC.FotoProducto;
 
             if (files.Count() == 0)
             {

@@ -54,7 +54,7 @@
                                     <input hidden asp-for="@Model[i].Id" />
                                     <div class="row h-100">
                                         <div class="col-5 col-md-2 text-center py-2">
-                                            <img src="~/fotosProductos/@Model[i].Foto" class="rounded" width="100px"/>
+                                            <img src="@WC.FotoProducto/@Model[i].Foto" class="rounded" width="160px"/>
                                         </div>
                                         <div class="col-12 col-lg-3 text-black pt-5 text-center">
                                                 <h5>@Model[i].Nombre</h5>

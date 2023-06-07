@@ -7,6 +7,7 @@ using EgoPadel.Utilidades.BrainTree;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
 using System.Text;
 
@@ -183,11 +184,12 @@ namespace EgoPadel.Controllers
 
                 foreach (var prod in productoUsuarioVM.ListaProducto)
                 {
-                    productoListaSB.Append($" - Nombre : {prod.Nombre} <span style='font-size:14px;'> (ID: {prod.Id})</span><br/>");
+                    productoListaSB.Append($" - Nombre : {prod.Nombre} <span style='font-size:14px;'> (Precio: {prod.Precio})</span><br/>");
                 }
+            productoListaSB.Append("Precio Total:"+ pedido.PrecioTotal);
 
             string messageBody = string.Format(HtmlBody,userActual.Nombre,
-														userActual.Apellidos,
+                                                        userActual.Apellidos,
                                                         userActual.UserName,
                                                         userActual.Email,
                                                         userActual.PhoneNumber,
