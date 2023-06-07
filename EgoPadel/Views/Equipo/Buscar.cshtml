@@ -38,49 +38,49 @@
         let listaEquipos = JSON.parse(equipos);
             console.log(listaEquipos);
        
-    //for (let i = 0; i < listaEquipos.length; i++)
-    //{
+    for (let i = 0; i < listaEquipos.length; i++)
+    {
 
-    //        if (i != 0 && listaEquipos[i].EquipoId == listaEquipos[i - 1].EquipoId) {
-    //        delete(listaEquipos[i]);
-    //        delete(listaEquipos[i - 1]);
-    //    }
-    //}
-    //console.log(listaEquipos)
+            if (i != 0 && listaEquipos[i].EquipoId == listaEquipos[i - 1].EquipoId) {
+            delete(listaEquipos[i]);
+            delete(listaEquipos[i - 1]);
+        }
+    }
+    console.log(listaEquipos)
 
-    //listaEquipos.forEach(function(equipo) {
-    //    let tbody = document.getElementById("tbody");
+    listaEquipos.forEach(function(equipo) {
+        let tbody = document.getElementById("tbody");
 
-    //    let row = document.createElement("tr");
-    //    tbody.appendChild(row);
+        let row = document.createElement("tr");
+        tbody.appendChild(row);
 
-    //    let colNombre = document.createElement("td");
-    //    colNombre.innerHTML = equipo.Nombre
-    //        row.appendChild(colNombre);
+        let colNombre = document.createElement("td");
+        colNombre.innerHTML = equipo.Nombre
+            row.appendChild(colNombre);
 
-    //    let colFoto = document.createElement("td");
-    //    let foto = document.createElement("img");
-    //    foto.src = '/images/Equipos/' + equipo.Foto;
-    //    foto.width = 50;
-    //    colFoto.appendChild(foto);
-    //    row.appendChild(colFoto);
+        let colFoto = document.createElement("td");
+        let foto = document.createElement("img");
+        foto.src = '/images/Equipos/' + equipo.Foto;
+        foto.width = 50;
+        colFoto.appendChild(foto);
+        row.appendChild(colFoto);
 
-    //    let colPuntos = document.createElement("td");
-    //    colPuntos.innerHTML = equipo.Puntos
-    //    row.appendChild(colPuntos);
+        let colPuntos = document.createElement("td");
+        colPuntos.innerHTML = equipo.Puntos
+        row.appendChild(colPuntos);
 
-    //    let colBoton = document.createElement("td");
+        let colBoton = document.createElement("td");
 
-    //    let boton = document.createElement("a");
-    //    boton.innerHTML = 'Unirse';
-    //    boton.setAttribute('href' , "/Equipo/Unirse/" + equipo.EquipoId);
+        let boton = document.createElement("a");
+        boton.innerHTML = 'Unirse';
+        boton.setAttribute('href' , "/Equipo/Unirse/" + equipo.EquipoId);
 
-    //        colBoton.appendChild(boton);
+            colBoton.appendChild(boton);
 
-    //    row.appendChild(colBoton);
+        row.appendChild(colBoton);
 
         
-    //})
+    })
 
     }
     

@@ -8,7 +8,13 @@
 
 </head>
 <h1>Clasificación Individual</h1>
-
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 <table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px; ">
     <thead class="text-center">
         <tr>
@@ -60,8 +66,7 @@
                     @if (User.IsInRole(WC.AdminRol))
                     {
                         <td>
-                            <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
-                            <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
+                            <a asp-controller="Puntos" asp-action="Detalle" asp-route-nombreUsuario="@item.UserName">Detalles</a> 
                         </td>
                     }
                 </tr>

@@ -15,7 +15,7 @@ namespace EgoPadel.Controllers
         {
             _db = db;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             var usuarios = from u in _db.UsuarioApp
                           select u;
@@ -23,6 +23,12 @@ namespace EgoPadel.Controllers
             usuarios = usuarios.OrderByDescending(u => u.Puntos);
 
             ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                usuarios = usuarios.Where(s => s.Nombre.Contains(searchString)
+                                       || s.Apellidos.Contains(searchString));
+            }
 
             return View(await usuarios.AsNoTracking().ToListAsync());
         }
