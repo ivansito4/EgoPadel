@@ -1,7 +1,10 @@
 ﻿@page
 @model LoginModel
 <link href="~/css/loginRegister.css" rel="stylesheet"/>
-<div id="logreg-forms" style="position:relative; left:8%;">
+<div id="logreg-forms" style="position:relative; left:20%; ">
+    <div class="contenedorImagen">
+        <img src="~/images/loginFoto.jpg" class="fotoPalaLogin" />
+    </div>
     <h1 class="h3 mb-3 font-weight-normal text-info pt-4" style="text-align:center; ">Conectarse</h1>
     @{
         if ((Model.ExternalLogins?.Count ?? 0) == 0)

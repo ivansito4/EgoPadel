@@ -61,7 +61,9 @@ a {
     transition: all .5s;
 }
 
-
+.loginM{
+    margin-top:50%;
+}
 
 
 .boxContainer {
@@ -180,4 +182,24 @@ a {
 .form-signup .social-login {
     width: 210px !important;
     margin: 0 auto;
+}
+
+
+.contenedorImagen {
+    position:absolute;
+    left:-446px;
+    top:-24px;
+}
+
+.fotoPala {
+    width: 450px;
+    height: 701px;
+    margin-top: 5%;
+}
+.fotoPalaLogin {
+    width: 370px;
+    height: 488px;
+    margin-top: 5%;
+    margin-left:22%;
+    margin-top:6.3%
 }

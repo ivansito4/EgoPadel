@@ -4,12 +4,17 @@
 
 
 <link href="~/css/loginRegister.css" rel="stylesheet" />
-<div class="py-4" style="height:750px;>
+<div class="py-4" style="height:750px;">
+    
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="row form-group">
+        
         <div class="col-8 offset-2">
-            <div class="card" style="height:700px; top:140px; left:33%;">
+            <div class="card" style="height:700px; top:140px; left:50%; border-bottom:-500px;">
+                <div class="contenedorImagen">
+                    <img src="~/images/loginRegistro.jpg" class="fotoPala" />
+                </div>
                 <div class="card-body" >
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <h3 class="col-12 text-success text-center py-4">
