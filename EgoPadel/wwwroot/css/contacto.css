@@ -2,12 +2,13 @@
     align-self: center;
     background-color: #fff;
     border-radius: 10px;
-    padding:30px;
-    width: 350px;
+    padding: 30px ;
     flex-direction: column;
-    margin-left:43%;
+    margin-left:40%;
     margin-top:6%;
     margin-bottom:-3%;
+    position:relative;
+    left:-14%;
 }
 
 .title {
@@ -87,3 +88,16 @@
     .form button:hover {
         background-color: #27408b;
     }
+
+.imagenContacto{
+    width:450px;
+    margin-top:5%;
+    
+}
+.contenedorImg {
+    margin: -4% 4% -4% -4%;
+    height: 500px;
+    float: left;
+    background-color: #c9e2fe;
+    border-radius: 10px;
+}
