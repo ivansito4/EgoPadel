@@ -460,3 +460,26 @@ body > div.container > main{
     .button:active {
         filter: brightness(.8);
     }
+
+    /*Mapa web*/
+    .listaWeb{
+        color: orange;
+        margin-left: 5%;
+        margin-top: 10px;
+    }
+
+    ul .listaWeb {
+        margin-left: 5%;
+    }
+
+    .enlaceWeb {
+        color: black;
+        text-decoration: dashed;
+    }
+    .mapaweb{
+        background-color:white;
+        margin-left:20%;
+        margin-right:10%;
+        border-radius:4%;
+        padding-bottom:20px;
+    }

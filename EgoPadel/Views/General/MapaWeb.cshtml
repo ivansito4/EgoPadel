@@ -1,5 +1,100 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Tienda";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="mapaweb">
+    <br />
+    <h2 class="text-black listaWeb">General</h2>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Index" asp-controller="Home">Página principal</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Crear" asp-controller="Reserva">Reservar Pista</a></li>
+
+    <li class="listaWeb">
+        <a class="enlaceWeb" asp-action="Index" asp-controller="Torneo">Torneos y Pozos</a>
+        <ul>
+            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="5" asp-controller="Producto">Detalle de Torneo</a></li>
+        </ul>
+    </li>
+
+
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Crear" asp-controller="Partido">Crear Partido</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Buscar" asp-controller="Partido">Buscar Partido</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Index" asp-controller="Equipo">Clasificación por equipos</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Index" asp-controller="ClasInd">Clasificación individual</a></li>
+    <li class="listaWeb">
+        <a class="enlaceWeb" asp-action="Index" asp-controller="Producto">Tienda</a>
+        <ul>
+            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="4" asp-controller="Producto">Detalle de Producto</a></li>
+        </ul>
+    </li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Index" asp-controller="Carrito">Carrito</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Contacto" asp-controller="General">Página de Contacto</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="MapaWeb" asp-controller="General">Mapa Web</a></li>
+    <li class="listaWeb"><a class="enlaceWeb" asp-action="Acesibilidad" asp-controller="General">Página de Contacto</a></li>
+    @if (User.IsInRole(WC.AdminRol) || User.IsInRole(WC.UsuarioRol))
+    {
+        <br />
+        <h2 class="text-black listaWeb">Mi Perfil</h2>
+
+        <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Mi Perfil</a></li>
+        <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/CambiarFoto" title="Manage">Cambiar Foto de Perfil</a></li>
+        <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Cambiar Contraseña</a></li>
+        <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/ExternalLogins" title="Manage">Enlace con Facebook</a></li>
+
+        @if (true)
+        {
+            <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Crear">Crear Equipo</a></li>
+            <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Buscar">Buscar Equipo</a></li>
+        }
+        else
+        {
+            <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Detalle">Mi Equipo</a></li>
+
+        }
+
+    }
+    else
+    {
+        <br />
+        <h2 class="text-black listaWeb">Login/Registro</h2>
+        <li class="listaWeb">
+            <a class="enlaceWeb" id="register" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" id="login" asp-area="Identity" asp-page="/Account/Login">Iniciar sesión</a>
+        </li>
+    }
+    @if (User.IsInRole(WC.AdminRol))
+    {<br />
+        <h2 class="text-black listaWeb">Administración</h2>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Register">Crear administrador</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Producto" asp-action="Index">Administrar Productos</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Empleado" asp-action="Index">Administrar Empleados</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Equipo" asp-action="Index">Administrar Equipos</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="ParticipantesIndividual" asp-action="Index">Administrar Participantes Torneo (Individual)</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="ParticipantesEquipo" asp-action="Index">Administrar Participantes Torneo (Equipo)</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Reserva" asp-action="Index">Administrar Reservas</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Torneo" asp-action="Index">Administrar Torneos</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Pista" asp-action="Index">Administrar Pistas</a>
+        </li>
+        <li class="listaWeb">
+            <a class="enlaceWeb" asp-controller="Pedido" asp-action="Index">Administrar Pedidos</a>
+        </li>
+    }
+</div>
