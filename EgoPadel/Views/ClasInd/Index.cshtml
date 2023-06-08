@@ -5,18 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" &amp;gt; />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<h1>Clasificación Individual</h1>
 @using (Html.BeginForm())
 {
-    <p>
+    <p style=" margin-left: 100px;">
         Buscar: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" class="btn-sm btn-success" />
     </p>
 }
-<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px; ">
+<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px;">
     <thead class="text-center">
+        @if (User.IsInRole(WC.AdminRol))
+        {
+            <tr><th class="text-center" colspan="5" style="font-family: 'Bebas Neue', cursive; font-size: 40px;">Clasificación Individual</th></tr>
+        }
+        else
+        {
+            <tr><th class="text-center" colspan="4" style="font-family: 'Bebas Neue', cursive; font-size: 40px;">Clasifica</th></tr>
+        }
+        
+        
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
@@ -34,7 +47,7 @@
         {
             @if (ViewBag.userId == item.Id)
             {
-                <tr class="bg-success text-light">
+                <tr class="bg-warning text-light">
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
@@ -46,9 +59,12 @@
                 </td>
                 @if (User.IsInRole(WC.AdminRol))
                 {
+                        <td>
+                            <a asp-controller="Puntos" asp-action="Detalle" asp-route-nombreUsuario="@item.UserName" class="w-50 btn btn-lg btn-success form-control">Detalles</a>
+                        </td>
                     <td>
                         <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
+                        <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
                     </td>
                 }
             </tr>
@@ -66,7 +82,11 @@
                     @if (User.IsInRole(WC.AdminRol))
                     {
                         <td>
-                            <a asp-controller="Puntos" asp-action="Detalle" asp-route-nombreUsuario="@item.UserName">Detalles</a> 
+                            <a asp-controller="Puntos" asp-action="Detalle" asp-route-nombreUsuario="@item.UserName" class="w-50 btn btn-lg btn-success form-control">Detalles</a>
+                        </td>
+                        <td>
+                            <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                            <a asp-action="Borrar" asp-route-id="@item.Id">Borrar</a>
                         </td>
                     }
                 </tr>
