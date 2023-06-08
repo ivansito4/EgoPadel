@@ -1,19 +1,20 @@
-﻿.card-acesibilsidad {
+﻿.card-contacto {
     align-self: center;
     background-color: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding:30px;
     width: 350px;
-    display: flex;
-    position: absolute;
     flex-direction: column;
-    right: 500px;
+    margin-left:43%;
+    margin-top:6%;
+    margin-bottom:-3%;
 }
 
 .title {
     font-size: 24px;
     font-weight: 600;
     text-align: center;
+    color:black;
 }
 
 .form {
@@ -66,7 +67,8 @@
             font-size: 14px;
         }
 
-.form .group textarea {
+.form .group .comentario {
+    text-align:start;
     resize: none;
     height: 100px;
 }

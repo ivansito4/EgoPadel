@@ -165,7 +165,7 @@ namespace EgoPadel.Controllers
                                             + "templates" + Path.DirectorySeparatorChar.ToString()
                                             + "PlantillaOrden.html";
 
-                var subject = "Nueva Oreden";
+                var subject = "Compra realizada con éxito";
                 string HtmlBody = "";
 
                 using (StreamReader sr = System.IO.File.OpenText(rutaTemplate))

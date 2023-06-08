@@ -1,20 +1,31 @@
-﻿<link rel="stylesheet" href="~/css/contacto.css" asp-append-version="true" />
-<div class="card-acesibilidad" style="background-color:palegreen;">
-    <span class="title">Leave a Comment</span>
-    <form class="form">
+﻿@model EgoPadel.Models.ContactoModel
+
+<link rel="stylesheet" href="~/css/contacto.css" asp-append-version="true" />
+<div class="card-contacto" style="background-color:white;">
+    <span class="title">Ponte en contacto con nosotros.</span>
+    <form class="form" asp-action="Contacto" method="post">
         <div class="group">
-            <input placeholder="‎" type="text" required="">
-            <label for="name">Name</label>
+            <input asp-for="Nombre" class="form-control" data-val-required="El campo Nombre es obligatorio." data-val-length="El campo Nombre debe tener al menos 3 caracteres." data-val-length-min="3" placeholder="‎" type="text">
+            <label asp-validation-for="Nombre" for="name">Nombre</label>
         </div>
         <div class="group">
-            <input placeholder="‎" type="email" id="email" name="email" required="">
-            <label for="email">Email</label>
+            <input asp-for="Email" class="form-control" data-val-required="El campo Email es obligatorio."  placeholder="‎" type="text">
+            <label asp-validation-for="Email" for="email">Email</label>
         </div>
         <div class="group">
-            <textarea placeholder="‎" id="comment" name="comment" rows="5" required=""></textarea>
-            <label for="comment">Comment</label>
+            <textarea asp-for="Mensaje" class="form-control" rows="4" data-val-required="El Mensaje no puede estar vacío." data-val-length="El Mensaje debe tener al menos 3 caracteres." data-val-length-min="3" placeholder="‎" type="text"></textarea>
+            <label asp-validation-for="Mensaje">Mensaje</label>
         </div>
-        <button type="submit">Submit</button>
+        <span asp-validation-for="Nombre" class="text-danger" ></span>
+        <span asp-validation-for="Email" class="text-danger" ></span>
+        <span asp-validation-for="Mensaje" class="text-danger"></span>
+        <br />
+        <input type="submit" value="Enviar" class="w-100 btn btn-lg btn-success form-control" style="margin-top: 10px;" />
     </form>
 </div>
 
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
