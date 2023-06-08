@@ -4,34 +4,51 @@
     ViewData["Title"] = "Detalle";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
+    <script type="text/javascript" src="~/js/ClasEquipos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 
-<h1>Detalle</h1>
-
-<div>
-    <h4>Equipo</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoEscudo)
-        </dt>
-        <dd class = "col-sm-10">
-            <img src="~/images/Equipos/@Html.DisplayFor(model => model.FotoEscudo)" width="50px"/>
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Puntos)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Puntos)
-        </dd>
-    </dl>
+</head>
+<div style="margin-left: 50px">
+    <p><a asp-controller="Home" asp-action="Index">Home</a> / <a asp-action="Detalle">Detalles Equipo</a></p>
 </div>
-<div>
+<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px;">
+    <thead class="text-center">
+        <tr>
+            <th class="text-center" colspan="3" style="font-family: 'Bebas Neue', cursive; font-size: 40px;">Detalles</th>
+            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FotoEscudo)
+             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Puntos)
+            </th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        <tr >
+            <td>
+                <img src="~/images/Equipos/@Html.DisplayFor(model => model.FotoEscudo)" width="50px" />
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Puntos)
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="margin-left: 50px;">
     @if (ViewBag.Equipo == true || User.IsInRole(WC.AdminRol))
     {
         <form asp-controller="Puntos" asp-action="CambiarPuntosEquipo" method="post">
