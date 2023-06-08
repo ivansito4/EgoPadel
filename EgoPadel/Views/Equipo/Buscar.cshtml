@@ -6,26 +6,27 @@
 }
 
 <head>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" &amp;gt; />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
-<h1> Buscar </h1>
-<p >
-    <a asp-action = "Create" > Create New </a>
-</p >
-<table class= "table" >
+<table class="table bg-light table-hover table-striped table-bordered" style="position: relative; left: 100px; margin-top: 50px; margin-bottom: 100px;">
+    
     <thead >
-        <tr >
-            <th >
-                Nombre
-            </ th >
+        <tr><th class="text-center" colspan="4" style="font-family: 'Bebas Neue', cursive; font-size: 40px;">Buscar Equipo</th></tr>
+        <tr class="text-center">
             <th >
                 Escudo
+            </ th >
+            <th >
+                Nombre
             </th >
             <th >
                 Puntos
             </th >
-            <th ></ th >
+            
         </tr >
     </thead >
     <tbody id = "tbody" >
@@ -52,11 +53,8 @@
         let tbody = document.getElementById("tbody");
 
         let row = document.createElement("tr");
+            row.className = "text-center";
         tbody.appendChild(row);
-
-        let colNombre = document.createElement("td");
-        colNombre.innerHTML = equipo.Nombre
-            row.appendChild(colNombre);
 
         let colFoto = document.createElement("td");
         let foto = document.createElement("img");
@@ -65,17 +63,23 @@
         colFoto.appendChild(foto);
         row.appendChild(colFoto);
 
+
+        let colNombre = document.createElement("td");
+        colNombre.innerHTML = equipo.Nombre
+            row.appendChild(colNombre);
+
         let colPuntos = document.createElement("td");
         colPuntos.innerHTML = equipo.Puntos
         row.appendChild(colPuntos);
 
         let colBoton = document.createElement("td");
+            colBoton.className = " text-center ";
 
         let boton = document.createElement("a");
         boton.innerHTML = 'Unirse';
         boton.setAttribute('href' , "/Equipo/Unirse/" + equipo.EquipoId);
-
-            colBoton.appendChild(boton);
+        boton.className = "w-50 btn btn-lg btn-success form-control";
+        colBoton.appendChild(boton);
 
         row.appendChild(colBoton);
 
