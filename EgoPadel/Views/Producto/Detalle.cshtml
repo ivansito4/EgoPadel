@@ -36,11 +36,11 @@
 
                                             @if (Model.ExisteEnCarrito)
                                             {
-                                                <a asp-action="QuitarCarrito" asp-route-Id="@Model.Producto.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;width:250px;">Quitar del carrito</a>
+                                                <a asp-action="QuitarCarrito" asp-route-Id="@Model.Producto.Id" class="btn btn-warning btn-square form-control btn-lg" style="height:50px;width:200px;">Quitar del carrito</a>
                                             }
                                             else
                                             {
-                                                <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;width:250px;">Añadir al carrito</button>
+                                                <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;width:200px;">Añadir al carrito</button>
                                             }
                                             @if (User.IsInRole(WC.AdminRol))
                                             {
