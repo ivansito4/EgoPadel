@@ -33,5 +33,16 @@ namespace EgoPadel.Controllers
              return RedirectToAction("Index" , "ClasInd");
             
         }
+
+        public IActionResult CambiarPuntosEquipo(int Id, int Puntos)
+        {
+
+            Equipo equipo = _db.Equipo.Where(u => u.Id == Id).FirstOrDefault();
+            equipo.Puntos = Puntos;
+            _db.Equipo.Update(equipo);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Equipo");
+
+        }
     }
 }
