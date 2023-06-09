@@ -163,6 +163,7 @@ body > div.container > main{
     height: 450px;
     position: relative;
     bottom: 180px;
+    margin-bottom: -302px;
 }
 
 .card {
