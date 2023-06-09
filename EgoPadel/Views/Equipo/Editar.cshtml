@@ -5,39 +5,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Editar</h1>
-
-<h4>Equipo</h4>
-<hr />
-<div class="row">
+<div class="row" style="margin-bottom: 500px;">
     <div class="col-md-4">
-        <form asp-action="Editar" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+        <div class="card" style="height:390px; top:140px; left:36%;">
+            <div class="card-body">
+                <h2 class="col-12 text-success text-center py-4">
+                    <strong>Editar Equipo</strong>
+                </h2>
+                <form asp-action="Editar" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FotoEscudo" class="control-label"></label><br />
+                        <input asp-for="FotoEscudo" type="file" name="files" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Puntos" class="control-label"></label>
+                        <input asp-for="Puntos" class="form-control" />
+                        <span asp-validation-for="Puntos" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Editar Equipo" class="w-100 btn btn-lg btn-success form-control" style="margin-top: 10px;" />
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="FotoEscudo" class="control-label"></label><br />
-                <input asp-for="FotoEscudo" type="file" name="files" />
+            <div>
+                <a asp-action="Index">Volver a la lista</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Puntos" class="control-label"></label>
-                <input asp-for="Puntos" class="form-control" />
-                <span asp-validation-for="Puntos" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
-            </div>
-        </form>
+         </div>
     </div>
-
-</div>
-
-<div>
-    <a asp-action="Index">Volver a la lista</a>
 </div>
 
 @section Scripts {
