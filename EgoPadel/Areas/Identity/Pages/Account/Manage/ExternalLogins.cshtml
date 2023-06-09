@@ -41,13 +41,14 @@
     <h4>Añadir otro método para logearte.</h4>
     <hr />
     <form id="link-login-form" asp-page-handler="LinkLogin" method="post" class="form-horizontal">
-        <div id="socialLoginList">
+        <div id="socialLoginList" style="height:100px;">
             <p>
                 @foreach (var provider in Model.OtherLogins)
                 {
                     <button id="@($"link-login-button-{provider.Name}")" type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
                 }
             </p>
+            
         </div>
     </form>
 }

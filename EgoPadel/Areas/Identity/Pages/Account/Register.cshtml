@@ -6,7 +6,7 @@
 <link href="~/css/loginRegister.css" rel="stylesheet" />
 <div class="py-4" style="height:750px;">
     
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
 
     <div class="row form-group">
         
@@ -30,7 +30,7 @@
                         </h3>
                         <hr />
                         <div class="py-2">
-                            <input asp-for="Input.Nombre" placeholder="Nombre" class="form-control" autocomplete="nombre" aria-required="true" />
+                            <input asp-for="Input.Nombre" maxlength="25" placeholder="Nombre" class="form-control" autocomplete="nombre" aria-required="true" />
                             <span asp-validation-for="Input.Nombre" class="text-danger"></span>
                         </div>
                         <div class="py-2">
@@ -42,12 +42,12 @@
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Input.Login" placeholder="Nombre de Usuario" class="form-control" autocomplete="Login" aria-required="true" />
+                            <input asp-for="Input.Login" maxlength="25" placeholder="Nombre de Usuario" class="form-control" autocomplete="Login" aria-required="true" />
                             <span asp-validation-for="Input.Login" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Input.PhoneNumber" placeholder="Teléfono" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
-                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            <input  maxlength="9" data-val-length="El Telefono debe tener 9 números." data-val-length-min="9" asp-for="Input.PhoneNumber" placeholder="Teléfono" class="form-control " autocomplete="PhoneNumber" aria-required="true" />
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="form-row row py-2">
                             <div class="col-6">
@@ -58,6 +58,7 @@
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger"></span>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         </div>
                         <div class="py-2">
                             @if (User.IsInRole(WC.AdminRol))
@@ -76,7 +77,7 @@
                         <p>
                             Al hacer click en <em>Registrar</em> estás de acuerdo con los terminos <a href="https://youtu.be/wT0EXirvFIo" target="_blank">Términos del servicio</a>
                         </p>
-                        <div class="row">
+                        <div class="row"> 
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {

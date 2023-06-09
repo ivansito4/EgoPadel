@@ -10,7 +10,7 @@
     width: 600px;
     height: 400px;
     text-align: center;
-    border-radius: 10px;
+    border-radius: 0px;
 }
 
 .texto {
@@ -40,4 +40,19 @@
     border-radius: 5px;
     width: 200px;
     height: 70px;
+}
+
+
+.imagenReserva {
+    width: 330px;
+    margin-top: 3.9%;
+    height: 370px;
+}
+
+.contenedorImg {
+    margin: 0;
+    float: left;
+    position:relative;
+    left:20.5%;
+    border-radius: 10px;
 }

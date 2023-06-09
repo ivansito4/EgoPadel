@@ -10,45 +10,49 @@
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.RutaImagen">Foto de Usuario</label>
-                <img src="~/fotosUsuarios/@Model.Input.RutaImagen" class="img-thumbnail" />
-            </div>
-            @*<div class="form-floating">
-            <input asp-for="Input.Puntos" class="form-control" disabled/>
-            <label asp-for="Input.Puntos" class="form-label">Puntos Totales</label>
-            <span asp-validation-for="Input.Puntos" class="text-danger"></span>
-            </div>*@
             <div>
                 <br />
                 <h1>Mis puntos : @Model.Input.Puntos</h1>
                 <br />
             </div>
-            <div class="py-2">
+            <div class="form-group" >
+                <label asp-for="Input.RutaImagen">Foto de Usuario</label>
+                <br />
+                <img src="~/fotosUsuarios/@Model.Input.RutaImagen" width="100px" class="img-thumbnail" />
+            </div>
+            
+            <div >
                 <p>Nombre de usuario</p>
-                <input asp-for="Input.Login" placeholder="Nombre de Usuario" class="form-control" autocomplete="Login" aria-required="true" />
+                <input asp-for="Input.Login" maxlength="25" placeholder="Nombre de Usuario" class="form-control text-center" style="width:300px;"
+                autocomplete="Login" aria-required="true" data-val-required="El campo Nombre de Usuario es obligatorio." data-val-length="El Nombre de Usuario debe tener al menos 6 caracteres." data-val-length-min="6" />
                 <span asp-validation-for="Input.Login" class="text-danger"></span>
+                <label asp-validation-for="Login"></label>
             </div>
             
-            <div class="py-2">
+            <div  >
                 <p>Nombre</p>
-                <input asp-for="Input.Nombre" placeholder="Nombre" class="form-control" autocomplete="nombre" aria-required="true" />
+                <input asp-for="Input.Nombre" maxlength="25" placeholder="Nombre" style="width:300px;" class="form-control text-center" autocomplete="nombre" aria-required="true"
+                       data-val-required="El campo Nombre de Usuario es obligatorio." data-val-length="El Nombre de Usuario debe tener al menos 6 caracteres." data-val-length-min="6" />
                 <span asp-validation-for="Input.Nombre" class="text-danger"></span>
+                <label asp-validation-for="Nombre"></label>
             </div>
-            <div class="py-2">
+            <div  >
                 <p>Apellidos</p>
-                <input asp-for="Input.Apellidos" placeholder="Apellidos" class="form-control" autocomplete="apellidos" aria-required="true" />
+                <input asp-for="Input.Apellidos" data-val-length="El Telefono debe tener 6 caracteres." data-val-length-min="6" placeholder="Apellidos" class="form-control text-center" autocomplete="apellidos" aria-required="true" />
                 <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
+                <label asp-validation-for="Apellidos"></label>
             </div>
-            <div class="py-2">
+            <div  >
                 <p>Email</p>
-                <input asp-for="Input.Email" placeholder="Email" class="form-control" type="email" autocomplete="Email" aria-required="true" />
+                <input asp-for="Input.Email" data-val-required="El campo Email es obligatorio." placeholder="Email" class="form-control text-center" type="email" autocomplete="Email" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <label asp-validation-for="Email"></label>
             </div>
             
-            <div class="py-2">
+            <div  >
                 <p>Número de teléfono</p>
-                <input asp-for="Input.PhoneNumber" placeholder="Teléfono" class="form-control" autocomplete="PhoneNumber" aria-required="true" />
+                <input style="width:110px;" maxlength="9" data-val-length="El Telefono debe tener 9 números." data-val-length-min="9" asp-for="Input.PhoneNumber" 
+                placeholder="Teléfono" class="form-control text-center" autocomplete="PhoneNumber" aria-required="true" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <br />

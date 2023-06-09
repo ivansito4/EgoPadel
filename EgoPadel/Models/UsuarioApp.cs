@@ -9,9 +9,11 @@ namespace EgoPadel.Models
     {
 
         [Required(ErrorMessage = "Nombre de Usuario obligatorio.")]
+        [MinLength(4)]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Apellidos de Usuario obligatorio.")]
+        [MinLength(4)]
         public string Apellidos { get; set; }
 
         [DefaultValue(0)]
