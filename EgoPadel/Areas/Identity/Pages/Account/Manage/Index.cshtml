@@ -23,30 +23,28 @@
             
             <div >
                 <p>Nombre de usuario</p>
-                <input asp-for="Input.Login" maxlength="25" placeholder="Nombre de Usuario" class="form-control text-center" style="width:300px;"
-                autocomplete="Login" aria-required="true" data-val-required="El campo Nombre de Usuario es obligatorio." data-val-length="El Nombre de Usuario debe tener al menos 6 caracteres." data-val-length-min="6" />
+                <input minlength="3" asp-for="Input.Login" maxlength="25" placeholder="Nombre de Usuario" class="form-control text-center" style="width:300px;"
+                autocomplete="Login" aria-required="true"  />
                 <span asp-validation-for="Input.Login" class="text-danger"></span>
                 <label asp-validation-for="Login"></label>
             </div>
             
-            <div  >
+            <div>
                 <p>Nombre</p>
-                <input asp-for="Input.Nombre" maxlength="25" placeholder="Nombre" style="width:300px;" class="form-control text-center" autocomplete="nombre" aria-required="true"
-                       data-val-required="El campo Nombre de Usuario es obligatorio." data-val-length="El Nombre de Usuario debe tener al menos 6 caracteres." data-val-length-min="6" />
+                <input minlength="3" maxlength="25" asp-for="Input.Nombre" placeholder="Nombre" style="width:300px;" autocomplete="on"
+                       class="form-control text-center" aria-required="true" />
                 <span asp-validation-for="Input.Nombre" class="text-danger"></span>
-                <label asp-validation-for="Nombre"></label>
             </div>
             <div  >
                 <p>Apellidos</p>
-                <input asp-for="Input.Apellidos" data-val-length="El Telefono debe tener 6 caracteres." data-val-length-min="6" placeholder="Apellidos" class="form-control text-center" autocomplete="apellidos" aria-required="true" />
+                <input minlength="3" asp-for="Input.Apellidos" placeholder="Apellidos" class="form-control text-center" autocomplete="on" aria-required="true" />
                 <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
-                <label asp-validation-for="Apellidos"></label>
+                
             </div>
             <div  >
                 <p>Email</p>
-                <input asp-for="Input.Email" data-val-required="El campo Email es obligatorio." placeholder="Email" class="form-control text-center" type="email" autocomplete="Email" aria-required="true" />
+                <input minlength="3" asp-for="Input.Email" data-val-required="El campo Email es obligatorio." placeholder="Email" class="form-control text-center" type="email" autocomplete="Email" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
-                <label asp-validation-for="Email"></label>
             </div>
             
             <div  >

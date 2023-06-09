@@ -25,28 +25,27 @@
                             else
                             {
                                 <strong>Registrarse</strong>
-
                             }
                         </h3>
                         <hr />
                         <div class="py-2">
-                            <input asp-for="Input.Nombre" maxlength="25" placeholder="Nombre" class="form-control" autocomplete="nombre" aria-required="true" />
+                            <input asp-for="Input.Nombre" required minlength="3" maxlength="25" placeholder="Nombre" class="form-control" autocomplete="nombre" aria-required="true" />
                             <span asp-validation-for="Input.Nombre" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Input.Apellidos" placeholder="Apellidos" class="form-control" autocomplete="apellidos" aria-required="true" />
+                            <input asp-for="Input.Apellidos" required minlength="3" placeholder="Apellidos" class="form-control" autocomplete="apellidos" aria-required="true" />
                             <span asp-validation-for="Input.Apellidos" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Input.Email" placeholder="Email" class="form-control" type="email" autocomplete="Email" aria-required="true" />
+                            <input asp-for="Input.Email" minlength="3" placeholder="Email" class="form-control" type="email" autocomplete="Email" aria-required="true" />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Input.Login" maxlength="25" placeholder="Nombre de Usuario" class="form-control" autocomplete="Login" aria-required="true" />
+                            <input asp-for="Input.Login" required minlength="3" maxlength="25" placeholder="Nombre de Usuario" class="form-control" autocomplete="Login" aria-required="true" />
                             <span asp-validation-for="Input.Login" class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input  maxlength="9" data-val-length="El Telefono debe tener 9 números." data-val-length-min="9" asp-for="Input.PhoneNumber" placeholder="Teléfono" class="form-control " autocomplete="PhoneNumber" aria-required="true" />
+                            <input  maxlength="9" minlength="9"   asp-for="Input.PhoneNumber" placeholder="Teléfono" class="form-control " autocomplete="PhoneNumber" aria-required="true" />
                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="form-row row py-2">
