@@ -52,7 +52,7 @@
 <div style="margin-left: 50px;">
     @if (ViewBag.Equipo == true || User.IsInRole(WC.AdminRol))
     {
-        <form asp-controller="Puntos" asp-action="CambiarPuntosEquipo" method="post">
+        <form asp-controller="Puntos" asp-action="CambiarPuntosIndividual" method="post">
             <div class="form-group">
                 <label asp-for="Puntos" class="control-label"></label>
                 <input asp-for="Puntos" class="form-control" />
