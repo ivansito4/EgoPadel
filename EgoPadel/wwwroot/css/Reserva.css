@@ -45,14 +45,14 @@
 
 .imagenReserva {
     width: 330px;
-    margin-top: 3.9%;
-    height: 370px;
+    margin-top: 3.8%;
+    height: 420px;
 }
 
 .contenedorImg {
     margin: 0;
     float: left;
     position:relative;
-    left:20.5%;
+    left:19%;
     border-radius: 10px;
 }

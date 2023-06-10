@@ -14,13 +14,13 @@
 </head>
 @if (User.IsInRole(WC.AdminRol) | User.IsInRole(WC.UsuarioRol))
 {
-    <div class="py-4" style="height:750px; width: 130%; margin-bottom:-20%; margin-top:8.8%;">
+    <div class="py-4" style="height:750px; width: 150%; margin-bottom:-20%; margin-top:2.8%;">
         <div class="contenedorImg">
             <img src="/images/fotoReserva.jpg" class="imagenReserva" />
         </div>
         <div class="row">
             <div class="col-md-4">
-                <div class="card" style="height:370px; top:240px; left:46%; border-radius:0;" id="card">
+                <div class="card" style="height:420px; top:160px; left:46%; border-radius:0;" id="card">
                     <div class="card-body">
                         <h2 class="col-12 text-success text-center py-4">
                         <strong>Reservar Pista</strong>
@@ -55,6 +55,9 @@
                                 <div class="form-group">
                                     <input asp-for="Reserva.Duracion" class="form-control" value=1 type="hidden" />       
                                 </div>
+                            <div class="form-group">
+                                <h3 id="precio-borrar" style=" color: black; margin-top: 10px; float: right; margin-right: 10px;">Total: 0€</h3>
+                            </div>
                                 <div class="form-group">
                                     <input asp-for="Reserva.Precio" class="form-control" value=18 type="hidden"/>
                                     <span asp-validation-for="Reserva.Precio" class="text-danger"></span>
@@ -124,6 +127,9 @@
             if (selectPista.value != "" && selectFecha.value != "" && selectHoras.value != "") {
                 let precio = document.getElementById("precio");
                 precio.style.display='block';
+
+                let precio2 = document.getElementById("precio-borrar");
+                precio2.style.display = 'none';
 
                 let card= document.getElementById("card");
                 card.style.height= '420px';

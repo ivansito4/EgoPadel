@@ -64,6 +64,7 @@ namespace EgoPadel.Controllers
             }
             carritoLista.Add(new Carrito { ProductoId = Id });
             HttpContext.Session.Set(WC.SessionCarrito, carritoLista);
+            TempData[WC.Exitoso] = "Producto añadido al carrito";
             return RedirectToAction(nameof(Index));
         }
 
@@ -83,6 +84,7 @@ namespace EgoPadel.Controllers
             }
 
             HttpContext.Session.Set(WC.SessionCarrito, carritoLista);
+            TempData[WC.Exitoso] = "Producto quitado del carrito";
             return RedirectToAction(nameof(Index));
         }
 
