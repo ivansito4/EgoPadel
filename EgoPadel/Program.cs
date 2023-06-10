@@ -41,8 +41,8 @@ builder.Services.AddTransient<IEmailSender, EmailSender>();
 //Login con facebook
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
-    options.AppId = "235926625592993";
-    options.AppSecret = "5f726017303df8d012d941105cd552ad";
+    options.AppId = "240393538631557";
+    options.AppSecret = "e5259dad14f48ab13c7ad447cf501522";
 });
 
 //Para tener sesiones
