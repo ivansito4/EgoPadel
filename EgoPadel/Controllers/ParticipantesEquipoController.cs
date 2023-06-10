@@ -1,6 +1,7 @@
 ﻿using EgoPadel.Datos;
 using EgoPadel.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EgoPadel.Controllers
 {
@@ -14,7 +15,7 @@ namespace EgoPadel.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<ParticipantesEquipo> listaParticipantesEquipo = _db.ParticipantesEquipos;
+            IEnumerable<ParticipantesEquipo> listaParticipantesEquipo = _db.ParticipantesEquipos.Include(c => c.Torneo).Include(c => c.Equipo);
             return View(listaParticipantesEquipo);
         }
 

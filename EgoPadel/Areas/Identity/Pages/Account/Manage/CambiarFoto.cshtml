@@ -13,7 +13,15 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Input.rutaFoto">Foto de Usuario Actual</label>
-                <img width="400px" src="~/fotosUsuarios/@Model.Input.rutaFoto" class="img-thumbnail" />
+                @if (@Model.Input.rutaFoto == null)
+                {
+                    <img src="~/images/userDefault.png" width="400px" class="img-thumbnail" />
+                }
+                else
+                {
+
+                    <img width="400px" src="~/fotosUsuarios/@Model.Input.rutaFoto" class="img-thumbnail" />
+                }
             </div>
             <div class="form-floating">
                 <label asp-for="Input.rutaFoto" class="form-label">Subir nueva Foto usuario</label><br /><br />

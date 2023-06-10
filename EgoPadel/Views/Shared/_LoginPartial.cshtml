@@ -17,15 +17,10 @@
             <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bienvenido <b>@UserManager.GetUserName(User)</b></a>
             <ul class="dropdown-menu" >
                 <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Mi Perfil</a></li>
-                @if(true){
+                
                     <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Crear">Crear Equipo</a></li>
                     <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Buscar">Buscar Equipo</a></li>
-                }
-                else
-                {
-                    <li><a class="dropdown-item" asp-controller="Equipo" asp-action="Detalle">Mi Equipo</a></li>
-                    
-                }
+                
                 
                 <li class="dropdown-item">
                     <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

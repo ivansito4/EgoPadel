@@ -186,7 +186,7 @@ namespace EgoPadel.Controllers
                 {
                     productoListaSB.Append($" - Nombre : {prod.Nombre} <span style='font-size:14px;'> (Precio: {prod.Precio})</span><br/>");
                 }
-            productoListaSB.Append("Precio Total:"+ pedido.PrecioTotal);
+            productoListaSB.Append("Precio Total:"+ pedido.PrecioTotal+" €");
 
             string messageBody = string.Format(HtmlBody,userActual.Nombre,
                                                         userActual.Apellidos,

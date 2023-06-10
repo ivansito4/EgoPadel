@@ -11,7 +11,7 @@
     <li class="listaWeb">
         <a class="enlaceWeb" asp-action="Index" asp-controller="Torneo">Torneos y Pozos</a>
         <ul>
-            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="5" asp-controller="Torneo">Detalle de Torneo</a></li>
+            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="2" asp-controller="Torneo">Detalle de Torneo</a></li>
         </ul>
     </li>
 
@@ -21,7 +21,7 @@
     <li class="listaWeb">
         <a class="enlaceWeb" asp-action="Index" asp-controller="Producto">Tienda</a>
         <ul>
-            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="4" asp-controller="Producto">Detalle de Producto</a></li>
+            <li class="listaWeb"><a class="enlaceWeb" asp-action="Detalle" asp-route-Id="2" asp-controller="Producto">Detalle de Producto</a></li>
         </ul>
     </li>
     <li class="listaWeb"><a class="enlaceWeb" asp-action="Index" asp-controller="Carrito">Carrito</a></li>
@@ -38,16 +38,10 @@
         <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Cambiar Contraseña</a></li>
         <li class="listaWeb"><a class="enlaceWeb" asp-area="Identity" asp-page="/Account/Manage/ExternalLogins" title="Manage">Enlace con Facebook</a></li>
 
-        @if (true)
-        {
+        
             <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Crear">Crear Equipo</a></li>
             <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Buscar">Buscar Equipo</a></li>
-        }
-        else
-        {
-            <li class="listaWeb"><a class="enlaceWeb" asp-controller="Equipo" asp-action="Detalle">Mi Equipo</a></li>
-
-        }
+        
 
     }
     else

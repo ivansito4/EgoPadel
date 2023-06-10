@@ -19,7 +19,15 @@
             <div class="form-group" >
                 <label asp-for="Input.RutaImagen">Foto de Usuario</label>
                 <br />
-                <img src="/images/userDefault.png" width="100px" class="img-thumbnail" />
+                @if (@Model.Input.RutaImagen == null)
+                {
+                    <img src="~/images/userDefault.png" width="100px" class="img-thumbnail" />
+                }
+                else
+                {
+
+                    <img src="~/fotosUsuarios/@Model.Input.RutaImagen" width="100px" class="img-thumbnail" />
+                }
             </div>
             
             <div >
@@ -44,7 +52,7 @@
             </div>
             <div  >
                 <p>Email</p>
-                <input minlength="3" asp-for="Input.Email" data-val-required="El campo Email es obligatorio." placeholder="Email" class="form-control text-center" type="email" autocomplete="Email" aria-required="true" />
+                <input minlength="3" required asp-for="Input.Email" data-val-required="El campo Email es obligatorio." placeholder="Email" class="form-control text-center" type="email" autocomplete="Email" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             
