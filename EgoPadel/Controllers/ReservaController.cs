@@ -81,8 +81,9 @@ namespace EgoPadel.Controllers
                 reservaVM.Reserva.UsuarioId = userId;
                 _db.ReservaPista.Add(reservaVM.Reserva);
                 _db.SaveChanges();
-                return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
-            
+                TempData[WC.Exitoso] = "Reserva Existosa";
+                return RedirectToAction("Index", "Home"); //Para que mande a index al hacer submit
+               
 
         }
 

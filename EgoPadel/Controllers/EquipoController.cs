@@ -95,6 +95,7 @@ namespace EgoPadel.Controllers
                 user.EquipoId = idEquipo;
                 _db.UsuarioApp.Update(user);
                 _db.SaveChanges();
+                TempData[WC.Exitoso] = "Equipo Creado";
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
             return View(equipo);
@@ -154,6 +155,7 @@ namespace EgoPadel.Controllers
 
                 _db.Equipo.Update(equipo);
                 _db.SaveChanges();
+                TempData[WC.Exitoso] = "Equipo Editado";
                 return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
             }
             return View(equipo);
@@ -189,6 +191,7 @@ namespace EgoPadel.Controllers
 
             _db.Equipo.Remove(equipo);
             _db.SaveChanges();
+            TempData[WC.Exitoso] = "Equipo Borrado";
             return RedirectToAction(nameof(Index)); //Para que mande a index al hacer submit
         }
         public IActionResult Unirse(int Id)
@@ -200,6 +203,7 @@ namespace EgoPadel.Controllers
             user.EquipoId = idEquipo;
             _db.UsuarioApp.Update(user);
             _db.SaveChanges();
+            TempData[WC.Exitoso] = "Se Ha Unido De Forma Existosa";
             return RedirectToAction(nameof(Index));
 
             
