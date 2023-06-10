@@ -4,14 +4,9 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+<table class="table bg-light table-hover table-striped table-bordered " style="position: relative; left: 100px; top: 20px;">
+    <thead class="text-center">
+        <tr><th class="text-center" colspan="3" style="font-family: 'Bebas Neue', cursive; font-size: 40px;">Participantes Torneo Equipos</th></tr>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Torneo)
@@ -22,7 +17,7 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody class="text-center">
 @foreach (var item in Model) {
         <tr>
             <td>
